@@ -54,7 +54,6 @@ public class BusyCallActivity extends AbstractVolumeActivity
 		}
 		String PhoneNumber = null, Role = null, Name = null, Title = null, Role_UI=null; 
 		String callerIDContent = bundle.getString("BusyID");
-        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
         QtalkDB qtalkdb = new QtalkDB();
     	
     	Cursor cs = qtalkdb.returnAllPBEntry();
@@ -64,13 +63,13 @@ public class BusyCallActivity extends AbstractVolumeActivity
         int cscnt = 0;
         for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
         {
-        	PhoneNumber = cs.getString(cs.getColumnIndex("number"));
+        	PhoneNumber = QtalkDB.getString(cs, "number");
         	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"callerIDContent="+callerIDContent+" PhoneNumber:"+PhoneNumber);
         	if (PhoneNumber.contentEquals(callerIDContent))
         	{
-        		Name = cs.getString(cs.getColumnIndex("name"));
-        		Role = cs.getString(cs.getColumnIndex("role"));
-        		Title = cs.getString(cs.getColumnIndex("title"));
+				Name = QtalkDB.getString(cs, "name");
+				Role = QtalkDB.getString(cs, "role");
+				Title = QtalkDB.getString(cs, "title");
         	}
         	cs.moveToNext();
         }

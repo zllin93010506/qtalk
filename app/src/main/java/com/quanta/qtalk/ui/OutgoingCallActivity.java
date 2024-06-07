@@ -1,21 +1,17 @@
 package com.quanta.qtalk.ui;
 
-import java.io.File;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +21,6 @@ import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.QtalkEngine;
 import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.R;
-import com.quanta.qtalk.provision.DrawableTransfer;
 import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
 import com.quanta.qtalk.util.QtalkUtility;
@@ -221,15 +216,14 @@ public class OutgoingCallActivity extends AbstractOutgoingCallActivity
 	        int cscnt = 0;
 	        for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
 	        {
-	        	PhoneNumber = cs.getString(cs.getColumnIndex("number"));
-	        	if (PhoneNumber.contentEquals(callerIDContent))
-	        	{
-	        		Name = cs.getString(cs.getColumnIndex("name"));
-					Alias = cs.getString(cs.getColumnIndex("alias"));
-	//        		Image = cs.getString(cs.getColumnIndex("image"));
-	        		Role = cs.getString(cs.getColumnIndex("role"));
-	        		Title = cs.getString(cs.getColumnIndex("title"));
-	        	}
+				PhoneNumber = QtalkDB.getString(cs, "number");
+				if (PhoneNumber.contentEquals(callerIDContent))
+				{
+					Name = QtalkDB.getString(cs, "name");
+					Role = QtalkDB.getString(cs, "role");
+					Alias = QtalkDB.getString(cs, "alias");
+					Title = QtalkDB.getString(cs, "title");
+				}
 	        	cs.moveToNext();
 	        }
 	        cs.close();

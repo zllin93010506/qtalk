@@ -1,10 +1,5 @@
 package com.quanta.qtalk.ui;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,19 +10,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import com.quanta.qtalk.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.quanta.qtalk.AppStatus;
 import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.R;
+import com.quanta.qtalk.util.Log;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class InPttSessionActivity extends AbstractInAudioSessionActivity {
 
@@ -141,9 +140,9 @@ public class InPttSessionActivity extends AbstractInAudioSessionActivity {
         //--------------------------------------------------------
         
         TextView callerID=(TextView)findViewById(R.id.callerName);//callerName
-        String callerIDContent = super.mRemoteID;
-        if (super.mContactQT!=null)
-            callerIDContent=super.mContactQT.getDisplayName();             
+        String callerIDContent = mRemoteID;
+        if (mContactQT!=null)
+            callerIDContent=mContactQT.getDisplayName();
                 //Toast.makeText(IncomingCallActivity.this,"caller="+callerIDContent,Toast.LENGTH_SHORT).show();                
         if(callerIDContent==null){
                     //Log.d(DEBUGTAG,"callerIDContent="+callerIDContent);
@@ -161,12 +160,12 @@ public class InPttSessionActivity extends AbstractInAudioSessionActivity {
         int cscnt = 0;
         for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
         {
-        	PhoneNumber = cs.getString(cs.getColumnIndex("number"));
-        	if (PhoneNumber.contentEquals(callerIDContent))
-        	{
-        		Name = cs.getString(cs.getColumnIndex("name"));
-        		Image = cs.getString(cs.getColumnIndex("image"));
-        	}
+            PhoneNumber = QtalkDB.getString(cs, "number");
+            if (PhoneNumber.contentEquals(callerIDContent))
+            {
+                Name = QtalkDB.getString(cs, "name");
+                Image = QtalkDB.getString(cs, "image");
+            }
         	cs.moveToNext();
         }
         Image = Image+".jpg";

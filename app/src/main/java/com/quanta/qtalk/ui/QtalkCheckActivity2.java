@@ -1,43 +1,35 @@
 package com.quanta.qtalk.ui;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
+import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.format.Time;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.quanta.qtalk.FailedOperateException;
 import com.quanta.qtalk.Flag;
 import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.R;
-import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.provision.FileUtility;
 import com.quanta.qtalk.provision.PackageChecker;
 import com.quanta.qtalk.provision.ProvisionUtility;
 import com.quanta.qtalk.provision.ProvisionUtility.ProvisionInfo;
 import com.quanta.qtalk.ui.history.HistoryDataBaseUtility;
-//import com.quanta.qtalk.provision.ProvisionUtility.ProvisionInfo;
-
-//import android.app.AlertDialog;
-//import android.content.DialogInterface;
-//import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.database.Cursor;
-import android.graphics.Color;
-//import android.net.Uri;
-import android.os.Bundle;
-//import android.os.Environment;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.text.format.Time;
+import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 public class QtalkCheckActivity2 extends AbstractSetupActivity{
 //	private final String TAG = "QtalkCheckActivity2";
@@ -377,8 +369,8 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
 				        int cscnt = 0;
 				        for( cscnt = 0; cscnt < cs1.getCount(); cscnt++)
 				        {
-				        	qtalk_settings.session = cs1.getString(cs1.getColumnIndex("Session"));
-				        	qtalk_settings.key = cs1.getString(cs1.getColumnIndex("Key"));
+				        	qtalk_settings.session = QtalkDB.getString(cs1, "Session");
+				        	qtalk_settings.key = QtalkDB.getString(cs1, "Key");
 				  //      	qtalk_settings.provisionServer = cs1.getString(cs1.getColumnIndex("Server"));
 				   //     	Log.d(TAG,"Server:"+ cs1.getString(cs1.getColumnIndex("Server")));
 				        	cs1.moveToNext();
@@ -440,8 +432,8 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
         int cscnt = 0;
         for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
         {
-        	qtalk_settings.session = cs.getString(cs.getColumnIndex("Session"));
-        	qtalk_settings.key = cs.getString(cs.getColumnIndex("Key"));
+			qtalk_settings.session = QtalkDB.getString(cs, "Session");
+			qtalk_settings.key = QtalkDB.getString(cs, "Key");
    //     	qtalk_settings.provisionServer = cs.getString(cs.getColumnIndex("Server"));
     //    	Log.d(TAG,"Server:"+ cs.getString(cs.getColumnIndex("Server")));
         	cs.moveToNext();
@@ -452,9 +444,9 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
         int cscnt1 = 0;
         for( cscnt1 = 0; cscnt1 < cs1.getCount(); cscnt1++)
         {
-        	qtalk_settings.lastProvisionFileTime = cs1.getString(cs1.getColumnIndex("lastProvisionFileTime"));
-        	qtalk_settings.lastPhonebookFileTime = cs1.getString(cs1.getColumnIndex("lastPhonebookFileTime"));
-        	cs1.moveToNext();
+			qtalk_settings.lastProvisionFileTime = QtalkDB.getString(cs1, "lastProvisionFileTime");
+			qtalk_settings.lastPhonebookFileTime = QtalkDB.getString(cs1, "lastPhonebookFileTime");
+			cs1.moveToNext();
         }
         cs1.close();
         qtalkdb.close();

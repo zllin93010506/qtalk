@@ -1,43 +1,37 @@
 package com.quanta.qtalk.ui;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import com.quanta.qtalk.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.quanta.qtalk.AppStatus;
-import com.quanta.qtalk.FailedOperateException;
 import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.QtalkEngine;
 import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.R;
 import com.quanta.qtalk.util.Hack;
+import com.quanta.qtalk.util.Log;
 import com.quanta.qtalk.util.QtalkUtility;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class InAudioSessionActivity extends AbstractInAudioSessionActivity {
 
@@ -178,11 +172,11 @@ public class InAudioSessionActivity extends AbstractInAudioSessionActivity {
         //Caller ID======================================
         TextView callerID=(TextView)findViewById(R.id.callerName);//callerName
         TextView callerRole=(TextView)findViewById(R.id.roleName);
-        
-        String callerIDContent = super.mRemoteID;
-        SIPNumber = super.mRemoteID;
-        if (super.mContactQT!=null)
-            callerIDContent=super.mContactQT.getDisplayName();             
+
+        String callerIDContent = mRemoteID;
+        SIPNumber = mRemoteID;
+        if (mContactQT!=null)
+            callerIDContent=mContactQT.getDisplayName();
                 //Toast.makeText(IncomingCallActivity.this,"caller="+callerIDContent,Toast.LENGTH_SHORT).show();                
         if(callerIDContent==null){
                     //Log.d(DEBUGTAG,"callerIDContent="+callerIDContent);
@@ -200,14 +194,13 @@ public class InAudioSessionActivity extends AbstractInAudioSessionActivity {
         int cscnt = 0;
         for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
         {
-        	PhoneNumber = cs.getString(cs.getColumnIndex("number"));
-        	if (PhoneNumber.contentEquals(callerIDContent))
-        	{
-        		Name = cs.getString(cs.getColumnIndex("name"));
- //       		Image = cs.getString(cs.getColumnIndex("image"));
-        		Role = cs.getString(cs.getColumnIndex("role"));
-        		Title = cs.getString(cs.getColumnIndex("title"));
-        	}
+			PhoneNumber = QtalkDB.getString(cs, "number");
+			if (PhoneNumber.contentEquals(callerIDContent))
+			{
+				Name = QtalkDB.getString(cs, "name");
+				Role = QtalkDB.getString(cs, "role");
+				Title = QtalkDB.getString(cs, "title");
+			}
         	cs.moveToNext();
         }
         String name_phrase = null;
@@ -453,7 +446,8 @@ public class InAudioSessionActivity extends AbstractInAudioSessionActivity {
     protected void onResume()
     {
     	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"onResume- mCallHold:"+mCallHold+", mSpeakerOn:"+mSpeakerOn);
-        super.onResume();
+
+		super.onResume();
         if(Hack.isQF3a())
 		    Hack.dumpAllResource(this, DEBUGTAG);
     }

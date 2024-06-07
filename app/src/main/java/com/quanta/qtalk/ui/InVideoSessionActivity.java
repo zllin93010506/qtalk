@@ -1,34 +1,18 @@
 package com.quanta.qtalk.ui;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.KeyguardManager;
 import android.app.ActionBar.LayoutParams;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.SensorManager;
@@ -36,50 +20,44 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
-//import android.view.GestureDetector;
-//import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.TextureView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ToggleButton;
-//import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-//import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.quanta.qtalk.AppStatus;
-import com.quanta.qtalk.Flag;
 import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.QtalkEngine;
 import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.R;
 import com.quanta.qtalk.media.video.CameraSourcePlus;
 import com.quanta.qtalk.media.video.IVideoStreamReportCB;
-import com.quanta.qtalk.media.video.VideoRenderPlus;
-import com.quanta.qtalk.media.video.VideoRenderSurfacePlus;
 import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
 import com.quanta.qtalk.util.QtalkUtility;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class InVideoSessionActivity extends AbstractInVideoSessionActivity implements OnGestureListener {
@@ -670,9 +648,9 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 
 		initGUI();
 
-		String callerIDContent = super.mRemoteID;
-		if (super.mContactQT!=null)
-			callerIDContent=super.mContactQT.getDisplayName();
+		String callerIDContent = mRemoteID;
+		if (mContactQT!=null)
+			callerIDContent=mContactQT.getDisplayName();
 		if(callerIDContent==null){
 			callerIDContent="Unknown caller";
 		}
@@ -1378,8 +1356,8 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 
 		mTimerTextView = new TextView(this);
 		if (Name == null) {
-			String callerIDContent = super.mRemoteID;
-			if(null == super.mRemoteID){
+			String callerIDContent = mRemoteID;
+			if(null == mRemoteID){
 				callerIDContent = "LocalLoopBack";
 			}
 			QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
@@ -1391,11 +1369,11 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 			int cscnt = 0;
 			for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
 			{
-				PhoneNumber = cs.getString(cs.getColumnIndex("number"));
+				PhoneNumber = QtalkDB.getString(cs, "number");
 				if (PhoneNumber.contentEquals(callerIDContent))
 				{
-					Name = cs.getString(cs.getColumnIndex("name"));
-					Role = cs.getString(cs.getColumnIndex("role"));
+					Name = QtalkDB.getString(cs, "name");
+					Role = QtalkDB.getString(cs, "role");
 				}
 				cs.moveToNext();
 			}

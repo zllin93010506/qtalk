@@ -1,39 +1,32 @@
 package com.quanta.qtalk.ui;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import android.content.Intent;
-//import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.database.Cursor;
-import android.graphics.Color;
 
 import com.quanta.qtalk.FailedOperateException;
 import com.quanta.qtalk.Flag;
-import com.quanta.qtalk.QtalkAction;
 import com.quanta.qtalk.QtalkDB;
-import com.quanta.qtalk.QtalkMain;
 import com.quanta.qtalk.QtalkSettings;
+import com.quanta.qtalk.R;
 import com.quanta.qtalk.provision.FileUtility;
 import com.quanta.qtalk.provision.ProvisionUtility;
 import com.quanta.qtalk.provision.ProvisionUtility.ProvisionInfo;
-import com.quanta.qtalk.ui.QThProvisionUtility;
 import com.quanta.qtalk.util.Hack;
-import com.quanta.qtalk.R;
 import com.quanta.qtalk.util.Log;
+
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 public class ProvisionLoginActivity extends AbstractSetupActivity
 {
@@ -206,10 +199,10 @@ public class ProvisionLoginActivity extends AbstractSetupActivity
 				        int cscnt = 0;
 				        for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
 				        {
-				        	qtalk_settings.session = cs.getString(cs.getColumnIndex("Session"));
-				        	qtalk_settings.key = cs.getString(cs.getColumnIndex("Key"));
-				        	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"Session:"+ cs.getString(cs.getColumnIndex("Session")));
-				        	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"Key:"+ cs.getString(cs.getColumnIndex("Key")));
+				        	qtalk_settings.session = QtalkDB.getString(cs, "Session");
+				        	qtalk_settings.key = QtalkDB.getString(cs, "Key");
+				        	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"Session:"+ qtalk_settings.session);
+				        	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"Key:"+ qtalk_settings.key);
 				        	cs.moveToNext();
 				        }
                 		String login_url = qtalk_settings.provisionServer+

@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 
+import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.ui.ProvisionSetupActivity;
 import com.quanta.qtalk.util.Log;
 
@@ -48,8 +49,8 @@ public class ContactManager
             result =  data_cursor.getCount();
             while (data_cursor.moveToNext()) 
             {
-                long contactId = Long.parseLong(data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Contacts._ID)));
-                String display_name = data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                long contactId = Long.parseLong(QtalkDB.getString(data_cursor, ContactsContract.Contacts._ID));
+                String display_name = QtalkDB.getString(data_cursor, ContactsContract.Contacts.DISPLAY_NAME);
                 ContactQT im = new ContactQT(contactId, "", loadContactPhoto(context.getContentResolver(), contactId),display_name);
                 systemContactList.add(im);
             }
@@ -88,9 +89,9 @@ public class ContactManager
             result =  data_cursor.getCount();
             while (data_cursor.moveToNext()) 
             {
-                long contactId = Long.parseLong(data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID)));
-                String display_name = data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-                String im_data = data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Im.DATA));
+                long contactId = Long.parseLong(QtalkDB.getString(data_cursor, ContactsContract.Data.CONTACT_ID));
+                String display_name = QtalkDB.getString(data_cursor, ContactsContract.Data.DISPLAY_NAME);
+                String im_data = QtalkDB.getString(data_cursor, ContactsContract.CommonDataKinds.Im.DATA);
                 ContactQT im = new ContactQT(contactId, im_data , loadContactPhoto(context.getContentResolver(), contactId),display_name);
                 imList.add(im);
             }
@@ -207,8 +208,8 @@ public class ContactManager
             if(phone_cursor.moveToFirst())
             {
                 // insert new parameters by assigning RAW_CONTACT_ID
-                long phone_raw_contact_id = Long.parseLong(phone_cursor.getString(phone_cursor.getColumnIndex(ContactsContract.Data.RAW_CONTACT_ID)));
-                String account_type = phone_cursor.getString(phone_cursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE));
+                long phone_raw_contact_id = Long.parseLong(QtalkDB.getString(phone_cursor, ContactsContract.Data.RAW_CONTACT_ID));
+                String account_type = QtalkDB.getString(phone_cursor, ContactsContract.RawContacts.ACCOUNT_TYPE);
                 if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG, "account_type:"+account_type);
                 result = "com.anddroid.contacts.sim".compareToIgnoreCase(account_type)==0?false:true;
                 values.put(ContactsContract.Data.RAW_CONTACT_ID, phone_raw_contact_id);
@@ -279,9 +280,9 @@ public class ContactManager
         {
             if(data_cursor.moveToFirst())
             {
-                long contactId = Long.parseLong(data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID)));
-                String display_name = data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-                String im_data = data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Im.DATA));
+                long contactId = Long.parseLong(QtalkDB.getString(data_cursor, ContactsContract.Data.CONTACT_ID));
+                String display_name = QtalkDB.getString(data_cursor, ContactsContract.Data.DISPLAY_NAME);
+                String im_data = QtalkDB.getString(data_cursor, ContactsContract.CommonDataKinds.Im.DATA);
                 Bitmap bit_map = null;
                 if(context.getContentResolver() != null)
                     bit_map = loadContactPhoto(context.getContentResolver(), contactId);
@@ -357,7 +358,7 @@ public class ContactManager
             {
                 if(data_cursor.moveToFirst())
                 {
-                    String display_name = data_cursor.getString(data_cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+                    String display_name = QtalkDB.getString(data_cursor, ContactsContract.Data.DISPLAY_NAME);
                     if(display_name != null)
                     {
                         result = display_name;

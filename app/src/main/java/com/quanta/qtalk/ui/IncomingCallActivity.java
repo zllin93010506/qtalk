@@ -1,15 +1,6 @@
 package com.quanta.qtalk.ui;
-import com.quanta.qtalk.AppStatus;
-import com.quanta.qtalk.Flag;
-import com.quanta.qtalk.QtalkDB;
-import com.quanta.qtalk.QtalkEngine;
-import com.quanta.qtalk.QtalkSettings;
-import com.quanta.qtalk.R;
-import com.quanta.qtalk.util.Hack;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,20 +11,24 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import com.quanta.qtalk.util.Log;
-import com.quanta.qtalk.util.PtmsData;
-import com.quanta.qtalk.util.QtalkUtility;
-
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.quanta.qtalk.AppStatus;
+import com.quanta.qtalk.Flag;
+import com.quanta.qtalk.QtalkDB;
+import com.quanta.qtalk.QtalkEngine;
+import com.quanta.qtalk.QtalkSettings;
+import com.quanta.qtalk.R;
+import com.quanta.qtalk.util.Hack;
+import com.quanta.qtalk.util.Log;
+import com.quanta.qtalk.util.PtmsData;
+import com.quanta.qtalk.util.QtalkUtility;
 
 
 public class IncomingCallActivity extends AbstractIncomingCallActivity 
@@ -182,11 +177,11 @@ public class IncomingCallActivity extends AbstractIncomingCallActivity
 
 
         Log.d(DEBUGTAG,"callerID:"+ callerID+" callerRole:"+callerRole);
-        String callerIDContent = super.mRemoteID;
+        String callerIDContent = mRemoteID;
 
 
-        if (super.mContactQT!=null)
-        	callerIDContent=super.mContactQT.getDisplayName();
+        if (mContactQT!=null)
+        	callerIDContent=mContactQT.getDisplayName();
 
         if(callerIDContent==null){
         	callerIDContent="Unknown caller";
@@ -210,13 +205,13 @@ public class IncomingCallActivity extends AbstractIncomingCallActivity
             int cscnt = 0;
             for( cscnt = 0; cscnt < cs.getCount(); cscnt++)
             {
-                PhoneNumber = cs.getString(cs.getColumnIndex("number"));
+                PhoneNumber = QtalkDB.getString(cs, "number");
                 if (PhoneNumber.contentEquals(callerIDContent))
                 {
-                    Name = cs.getString(cs.getColumnIndex("name"));
-                    Role = cs.getString(cs.getColumnIndex("role"));
-                    Alias = cs.getString(cs.getColumnIndex("alias"));
-                    Title  = cs.getString(cs.getColumnIndex("title"));
+                    Name = QtalkDB.getString(cs, "name");
+                    Role = QtalkDB.getString(cs, "role");
+                    Alias = QtalkDB.getString(cs, "alias");
+                    Title = QtalkDB.getString(cs, "title");
                 }
                 cs.moveToNext();
             }
@@ -381,8 +376,8 @@ public class IncomingCallActivity extends AbstractIncomingCallActivity
             }
         };
         
-        Log.d(DEBUGTAG,"super.mEnableVideo "+ super.mEnableVideo);
-        if(videoBtn!=null && super.mEnableVideo){
+        Log.d(DEBUGTAG,"super.mEnableVideo "+ mEnableVideo);
+        if(videoBtn!=null && mEnableVideo){
             videoBtn.setOnClickListener(theclick);
         }
         if(voiceBtn!=null)

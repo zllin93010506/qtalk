@@ -1,22 +1,12 @@
 package com.quanta.qtalk.ui;
 
-import java.util.Calendar;
-
-//import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.pm.PackageManager; 
 import android.content.Context;
-//import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Color;
-//import android.content.pm.ActivityInfo;
-//import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
-//import android.view.Menu;
-//import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
@@ -26,13 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
-//import android.widget.Toast;
 
 import com.quanta.qtalk.FailedOperateException;
 import com.quanta.qtalk.QtalkSettings;
@@ -43,6 +31,8 @@ import com.quanta.qtalk.provision.PackageChecker.AppInfo;
 import com.quanta.qtalk.provision.PackageVersionUtility;
 import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
+
+import java.util.Calendar;
 
 public class ProvisionSetupActivity extends AbstractSetupActivity
 {

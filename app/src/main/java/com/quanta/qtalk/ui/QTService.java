@@ -321,7 +321,7 @@ public class QTService extends Service implements IQtalkEngineListener {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		super.onStartCommand(intent, flags | START_STICKY, startId);
+		super.onStartCommand(intent, flags | Service.START_FLAG_REDELIVERY, startId);
 		startForegroundNotification();
 		Log.d(DEBUGTAG,"onStartCommand");
 		return START_REDELIVER_INTENT;
@@ -347,11 +347,11 @@ public class QTService extends Service implements IQtalkEngineListener {
 //					Log.d(DEBUGTAG, "AT_DB size=" + size);
 				cs.moveToFirst();
 				for (int cscnt = 0; cscnt < cs.getCount(); cscnt++) {
-					session = cs.getString(cs.getColumnIndex("Session"));
-					key = cs.getString(cs.getColumnIndex("Key"));
-					provisionID = cs.getString(cs.getColumnIndex("Uid"));
-					provisionType = cs.getString(cs.getColumnIndex("Type"));
-					provisionServer = cs.getString(cs.getColumnIndex("Server"));
+					session = QtalkDB.getString(cs, "Session");
+					key = QtalkDB.getString(cs, "Key");
+					provisionID = QtalkDB.getString(cs, "Uid");
+					provisionType = QtalkDB.getString(cs, "Type");
+					provisionServer = QtalkDB.getString(cs, "Server");
 					cs.moveToNext();
 				}
 				cs.close();
@@ -363,8 +363,7 @@ public class QTService extends Service implements IQtalkEngineListener {
 //					Log.d(DEBUGTAG, "PT_DB size=" + size1);
 				cs1.moveToFirst();
 				for (int cscnt = 0; cscnt < cs1.getCount(); cscnt++) {
-					lastPhonebookFileTime = cs1.getString(cs1
-							.getColumnIndex("lastPhonebookFileTime"));
+					lastPhonebookFileTime = QtalkDB.getString(cs1, "lastPhonebookFileTime");
 					cs1.moveToNext();
 				}
 				cs1.close();
@@ -940,11 +939,11 @@ public class QTService extends Service implements IQtalkEngineListener {
 //			Log.d(DEBUGTAG, "AT_DB size=" + size);
 			cs.moveToFirst();
 			for (int cscnt = 0; cscnt < cs.getCount(); cscnt++) {
-				session = cs.getString(cs.getColumnIndex("Session"));
-				key = cs.getString(cs.getColumnIndex("Key"));
-				provisionID = cs.getString(cs.getColumnIndex("Uid"));
-				provisionType = cs.getString(cs.getColumnIndex("Type"));
-				provisionServer = cs.getString(cs.getColumnIndex("Server"));
+				session = QtalkDB.getString(cs, "Session");
+				key = QtalkDB.getString(cs, "Key");
+				provisionID = QtalkDB.getString(cs, "Uid");
+				provisionType = QtalkDB.getString(cs, "Type");
+				provisionServer = QtalkDB.getString(cs, "Server");
 				cs.moveToNext();
 			}
 			cs.close();
@@ -955,7 +954,7 @@ public class QTService extends Service implements IQtalkEngineListener {
 //			Log.d(DEBUGTAG, "PT_DB size=" + size1);
 			cs1.moveToFirst();
 			for (int cscnt = 0; cscnt < cs1.getCount(); cscnt++) {
-				lastPhonebookFileTime = cs1.getString(cs1.getColumnIndex("lastPhonebookFileTime"));
+				lastPhonebookFileTime = QtalkDB.getString(cs1, "lastPhonebookFileTime");
 				cs1.moveToNext();
 			}
 			cs1.close();
