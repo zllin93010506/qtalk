@@ -1,0 +1,1 @@
+parcelable SR2SmartConnectData;

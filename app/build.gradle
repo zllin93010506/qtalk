@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        applicationId "com.quanta.qtalk"
+        minSdkVersion 25
+        versionCode 11605
+        versionName "1.16.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "qtalk_${versionName}_all_phone")
+    }
+    dataBinding{
+        enabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        //for coverage report in unit test
+        debug {
+            testCoverageEnabled true
+        }
+//        android {
+//            jacoco {
+//                version = '0.7.9'
+//            }
+//        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    signingConfigs	{
+        release	{
+            keyAlias 'qf3key'
+            keyPassword 'testlab'
+            storeFile file('QF3.keystore')
+            storePassword 'testlab'
+        }
+    }
+
+    buildTypes	{
+        release {
+            signingConfig	signingConfigs.release
+        }
+    }
+    useLibrary 'org.apache.http.legacy'
+    namespace 'com.quanta.qtalk'
+    lint {
+        abortOnError false
+    }
+}
+
+
+//dxpendencies {
+
+
+//    compile fileTree(include: 'asmack-android-8-4.0.7.jar', dir: 'src/main/libs')
+//   compile fileTree(include: 'org.xbill.dns_2.1.7.jar', dir: 'src/main/libs')
+//  compile 'com.android.support:support-v4:22.2.0'
+//}
+
+dependencies {
+    implementation fileTree(dir: 'src/main/jniLibs', include: ['*.jar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.github.tony19:logback-android:2.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation "androidx.work:work-runtime:2.7.0"
+    implementation "androidx.core:core:1.1.0"
+}
+
+

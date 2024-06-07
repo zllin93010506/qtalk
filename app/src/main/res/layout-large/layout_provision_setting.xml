@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FullLayoutSetup"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_h"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
+
+    <TableLayout
+        android:id="@+id/LayoutSetup"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="80dp"
+        android:layout_weight="0.30"
+        android:shrinkColumns="4"
+        android:stretchColumns="0,1,2,3" >
+
+        <TableRow
+            android:id="@+id/TableRowIcon"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/login_Icon"
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:soundEffectsEnabled="false"
+                android:src="@drawable/login_img_logo" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:src="@null"
+                android:visibility="gone" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow02"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/mEdtUserName"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/login_img_input"
+                android:gravity="center"
+                android:hint="Phone Number"
+                android:layout_span="5"
+                android:maxLength="15"
+                android:singleLine="true"
+                android:textColorHint="#808080"
+                android:textSize="10pt" >
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow03"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="5dp"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/myDatePickerButton"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+				android:background="@drawable/login_img_input"
+                android:hint="Choose Date"
+                android:layout_span="5"
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/mEdtPassWord"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow04"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/mEdtCSServer"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+				android:background="@drawable/login_img_input"
+                android:gravity="center"
+                android:hint="Server Address"
+                android:layout_span="4"
+                android:maxLength="32"
+                android:singleLine="true"
+                android:textColorHint="#808080"
+                android:textSize="10pt" >
+            </EditText>
+
+            <Spinner
+                android:id="@+id/mTypespinner"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:background="@drawable/login_img_input"
+                android:gravity="center"
+                android:paddingLeft="20dp" />
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center" >
+
+        <TextView
+            android:id="@+id/mTxtMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:layout_below="@+id/TxtServer"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#6E6E6E"
+            android:textSize="10pt"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center" >
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/selector_btn_submit"
+            android:onClick="ClickHandler"
+            android:paddingLeft="10dp"
+            android:text="登入"
+            android:textColor="#128995"
+            android:textSize="20sp" >
+        </Button>
+
+        <TextView
+            android:id="@+id/versionName"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/saveButton"
+            android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:text="1111"
+            android:textColor="#0C746E"
+            android:textSize="12sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</TableLayout>

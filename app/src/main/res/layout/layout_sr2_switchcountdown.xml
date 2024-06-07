@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!-- 
+    <TextView
+        android:id="@+id/sr2_switch_tv"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        android:text=""
+        android:gravity="left"
+        android:textAppearance="?android:attr/textAppearanceMedium" /> -->
+   <ListView android:id="@+id/sr2_switch_list" 
+	 android:layout_height="fill_parent"
+	 android:layout_width="fill_parent"
+
+	 android:cacheColorHint="#00000000"
+	 android:divider="#FFFFFFFF"
+	 android:dividerHeight="1px" >
+	 </ListView>
+</LinearLayout>

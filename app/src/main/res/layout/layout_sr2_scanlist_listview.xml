@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	 >
+
+	<ImageView android:id="@+id/scanlist_img" 
+		android:layout_width="48dp"
+		android:layout_height="48dp" 
+		android:layout_margin="5px"/>
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+
+		<TextView android:id="@+id/scanlist_listview_main" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:textColor="#FFFFFFFF"
+			android:textSize="22dp" />
+		<TextView android:id="@+id/scanlist_listview_sub" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:textColor="#FFFFFFFF"
+			android:textSize="13dp" />
+
+	</LinearLayout>
+</LinearLayout>
+
+<!--
+
+android:background="@drawable/listselector"
+	 android:drawSelectorOnTop="true"
+	 android:listSelector="@drawable/listselector"
+
+
+	<LinearLayout 
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" android:layout_width="fill_parent"
+ android:layout_height="200dip">
+
+	<TextView android:id="@+id/TextView01" 
+	android:layout_height="wrap_content" 
+	android:textStyle="normal|bold" 
+	android:gravity="center_vertical|center_horizontal" 
+	android:layout_width="fill_parent"></TextView>
+	 <TextView android:id="@+id/TextView02"
+	 android:layout_width="wrap_content" android:layout_height="wrap_content"
+	 android:layout_marginLeft="10px" android:textColor="#0099CC">
+ 	</TextView>
+ 	 
+	 <ListView android:id="@+id/ListView01" android:layout_height="wrap_content"
+	 android:layout_width="fill_parent">
+	 </ListView>
+</LinearLayout>-->

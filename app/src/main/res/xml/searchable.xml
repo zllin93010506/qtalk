@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+   	android:label="Search contact"
+    android:hint="Type to search" 
+    android:searchSuggestAuthority="com.quanta.qtalk.ui.ContactsActivity"
+    
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    
+    android:searchSettingsDescription="find contact"
+    android:includeInGlobalSearch="false"
+    android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+    android:searchSuggestSelection=" ?" >
+    
+   
+    
+    
+</searchable>

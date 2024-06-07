@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/broadcast_popout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    
+        <RelativeLayout
+            android:id="@+id/broadcast_popout_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:text="@string/broadcast"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn_close" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/broadcast_popout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/broadcast_popout_title"
+            android:layout_centerInParent="true"
+            android:background="@drawable/img_popout_broadcast" >
+
+            <ScrollView
+                android:id="@+id/tts_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="430dp"
+				android:paddingTop="30dp"
+                android:orientation="vertical"
+                android:paddingBottom="20dp" >
+
+                <RadioGroup
+                    android:id="@+id/ttsRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </RadioGroup>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/empty_message"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingBottom="150dp"
+                android:text="@string/warming_with_no_tts"
+                android:textAppearance="@style/pttBtn"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/ptt_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tts_ll"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/selector_btn_new_broadcast"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="20dp"
+                android:text="@string/push_to_talk"
+                android:textColor="#723e1a" 
+                android:textSize="24sp"/>
+
+           </RelativeLayout>
+    
+</RelativeLayout>

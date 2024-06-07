@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_contactlist2"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#d2e7f7">
+   
+
+        
+    <RelativeLayout
+        android:id="@+id/contact2_title"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/PhoneNumber"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            style="@style/DialNum"
+            android:visibility="gone" />
+
+		<ImageView
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:scaleType="fitXY"
+		    android:src="#00ffffff" />
+		<ImageButton 
+		    android:id="@+id/notification_none"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 							
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="7dp"
+			android:background="@null"
+			android:src="@drawable/btn_notification_none"/>
+		<ImageButton 
+		    android:id="@+id/notification_unread"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 							
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="7dp"
+			android:background="@null"
+			android:src="@drawable/btn_notification_unread"
+			android:visibility="gone"/>
+        <ImageView 
+			android:layout_width="145dp"
+			android:layout_height="wrap_content" 							
+			android:layout_centerInParent="true"
+			android:src="@drawable/all_light_icn"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/contact2_all"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/contact2_title"
+        android:layout_above="@id/tab_btn"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        
+        <LinearLayout
+            android:id="@+id/contacts"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ns_tab"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/cgh_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cgh_logo" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/contacts_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ns_tab"
+                    android:clickable="true"
+                    android:text="@string/nss_title_patient"
+                    style="@style/ns_title_inactive" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/call_contacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ns_tab"
+                    android:clickable="false"
+                    android:text="@string/contacts"
+                    style="@style/ns_title_inactive" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/call_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ns_tab_active"
+                    android:text="@string/call_history"
+                    style="@style/ns_title_active" />
+            </RelativeLayout>
+        </LinearLayout>
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="15dp"
+            android:cacheColorHint="#00000000"
+            android:listSelector="#00000000"
+            android:background="@null"
+            android:layout_gravity="center"
+            android:divider="@drawable/contact_separateline"
+            android:padding="5dip" />
+    </LinearLayout>
+    
+     <LinearLayout
+         		android:id="@+id/tab_btn"
+        	    android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone"
+				android:layout_alignParentBottom="true">
+		        <ImageButton
+		            android:id="@+id/CarePlan"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:background="@null"
+		            android:src="@drawable/btn_measure"
+		            android:layout_marginRight="1dp"
+		            android:layout_weight="1"/>
+		        <ImageButton
+		            android:id="@+id/Profile"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:background="@null"
+		            android:src="@drawable/btn_profile"
+		            android:layout_marginLeft="1dp"
+		            android:layout_marginRight="1dp"
+		            android:layout_weight="1"/>
+		        <ImageButton
+		            android:id="@+id/Canlendar"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:background="@null"
+		            android:src="@drawable/btn_calendar"
+		            android:layout_marginLeft="1dp"
+		            android:layout_marginRight="1dp"
+		            android:layout_weight="1"/>
+		        <ImageButton
+		            android:id="@+id/Phonebook"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textSize="6pt"
+		            android:background="@null"
+		            android:src="@drawable/btn_contact"
+		            android:layout_marginLeft="1dp"
+		            android:layout_weight="1"
+		            android:clickable="false"/>
+        </LinearLayout>
+    	<TextView
+	          android:id="@+id/versionName"
+	          android:layout_width="fill_parent"
+	          android:layout_height="25dp"
+			  android:layout_alignParentBottom="true"
+	          android:layout_centerHorizontal="true"
+	          android:paddingBottom="3dp"
+	          android:gravity="center"
+	          android:text=""
+			  android:textSize="12sp"			
+			  android:textColor="#0C746E"
+			  android:visibility="gone"/>
+
+    	
+    	
+      <LinearLayout
+        android:id="@+id/wifiphone_tab_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" 
+        android:background="@drawable/img_call_tab_bottom"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bottom_contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_call_contacts_highlight" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:text="@string/contacts"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bottom_keypad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_call_pad" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:text="@string/keypad"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bottom_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_call_history" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:text="@string/call_history"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

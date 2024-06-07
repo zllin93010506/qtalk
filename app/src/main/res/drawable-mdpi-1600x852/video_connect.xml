@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list     
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/connecting"
+    android:oneshot="false"
+    >
+    <item android:drawable="@drawable/img_video_connecting_01" android:duration="200" />
+    <item android:drawable="@drawable/img_video_connecting_02" android:duration="200" />
+    <item android:drawable="@drawable/img_video_connecting_03" android:duration="200" />
+    <item android:drawable="@drawable/img_video_connecting_02" android:duration="200" />
+</animation-list>

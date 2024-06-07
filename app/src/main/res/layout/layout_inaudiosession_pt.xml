@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_half_trans"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/img_popout_call" >
+
+        <ImageView
+            android:id="@+id/faceiconPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@null"
+            android:src="@drawable/img_incall_patient" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/faceiconPic"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/roleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="20dp"
+                android:text="Role"
+                style="@style/popout_role" />
+
+            <TextView
+                android:id="@+id/callerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="0dp"
+                android:text="Caller ID"
+                style="@style/popout_name" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/relativeLayout1"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/video_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="@string/insession"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:paddingRight="15dp" />
+
+        <TextView
+            android:id="@+id/voicetimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="00:00"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        android:gravity="bottom"
+        android:layout_marginBottom="30dp" >
+
+         <Button
+            android:id="@+id/endBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_endcall"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/rl_speakerstatus" 
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:text="@string/end_call"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_videoChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/endBtn" 
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/btn_videoChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_btn_camera"
+                android:text="@string/switch_to_video"
+                android:paddingLeft="30dp"
+                android:textSize="15sp" 
+                android:textColor="#FFFFFF"/>
+                />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/rl_speakerstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:layout_marginRight="5dp"
+			android:visibility="visible"
+            >
+
+            <ToggleButton
+                android:id="@+id/btn_speakerstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_voice_toggle_bg"
+                android:paddingLeft="30dp"
+                android:textColor="#FFFFFF"
+                android:textOff="@string/open_speaker"
+                android:textOn="@string/close_speaker"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
