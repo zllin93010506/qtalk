@@ -1,0 +1,19 @@
+nea_debug.lo: nea_debug.c \
+ /tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h \
+ nea_debug.h ../su/sofia-sip/su_debug.h ../su/sofia-sip/su_log.h \
+ /tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stdarg.h \
+ ../su/sofia-sip/su_config.h ../su/sofia-sip/su_configure.h
+
+/tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h:
+
+nea_debug.h:
+
+../su/sofia-sip/su_debug.h:
+
+../su/sofia-sip/su_log.h:
+
+/tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stdarg.h:
+
+../su/sofia-sip/su_config.h:
+
+../su/sofia-sip/su_configure.h:

@@ -1,0 +1,69 @@
+su_tag.lo: su_tag.c ../../config.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/assert.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/cdefs.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/cdefs_elf.h \
+ sofia-sip/su_config.h sofia-sip/su_configure.h sofia-sip/su_tag_class.h \
+ sofia-sip/su_tag.h sofia-sip/su_types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/stdint.h \
+ /tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/_types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/machine/_types.h \
+ /tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include-fixed/sys/types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/posix_types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/stddef.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/compiler.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/asm/posix_types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/asm/types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/types.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/machine/kernel.h \
+ /tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/sysmacros.h \
+ sofia-sip/su_alloc.h \
+ /tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stdarg.h
+
+../../config.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/assert.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/cdefs.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/cdefs_elf.h:
+
+sofia-sip/su_config.h:
+
+sofia-sip/su_configure.h:
+
+sofia-sip/su_tag_class.h:
+
+sofia-sip/su_tag.h:
+
+sofia-sip/su_types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/stdint.h:
+
+/tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/_types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/machine/_types.h:
+
+/tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include-fixed/sys/types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/posix_types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/stddef.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/compiler.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/asm/posix_types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/asm/types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/linux/types.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/machine/kernel.h:
+
+/tmp/my-android-toolchain/bin/../sysroot/usr/include/sys/sysmacros.h:
+
+sofia-sip/su_alloc.h:
+
+/tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stdarg.h:

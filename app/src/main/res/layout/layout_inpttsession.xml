@@ -82,7 +82,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/rl_speakerstatus"
             android:background="@drawable/selector_btn_endcall"
             android:gravity="center"
             android:text="@string/end_ptt"

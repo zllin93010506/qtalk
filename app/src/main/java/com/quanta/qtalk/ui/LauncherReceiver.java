@@ -179,6 +179,7 @@ public class LauncherReceiver extends BroadcastReceiver {
 			    isForcedLogin = true;
 			}else{
 				Log.d(DEBUGTAG,"<warning> skip Login command, because now is in Login progress");
+				return;
 			}
 		}
 		else if(TextUtils.equals(action, LauncherService.ACTION_VC_MAKE_CALL)){

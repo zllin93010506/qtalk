@@ -189,11 +189,21 @@ public class ProvisionUtility
         documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         if(documentBuilder != null)
         {
+            File configFile = new File(provisionConfigPath);
+            if(!configFile.exists())
+            {
+                Log.e(DEBUGTAG,"parseProvisionConfig(), file not exist");
+                return null;
+            }
             document = documentBuilder.parse(new File(provisionConfigPath));
             document.getDocumentElement().normalize(); 
+        } else {
+            Log.e(DEBUGTAG,"parseProvisionConfig(), documentBuilder is null");
+            return null;
         }
         if(document != null)
             elements  = document.getElementsByTagName(TAG_GENERIC);
+
         if(elements != null)
         {
             iElementLength = elements.getLength();

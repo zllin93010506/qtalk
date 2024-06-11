@@ -1,0 +1,53 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: low6 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D9.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /I "./" /I "../" /I "../include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /D "HAS_IPv6_LIB" /FR"..\temp\debug\low6/" /Fo"..\temp\debug\low6/" /Fd"..\temp\debug\low6/" /FD /GZ /c 
+"C:\temp\iclsip_172\sip\src\low\cx_event.c"
+"C:\temp\iclsip_172\sip\src\low\cx_mem.c"
+"C:\temp\iclsip_172\sip\src\low\cx_misc.c"
+"C:\temp\iclsip_172\sip\src\low\cx_mutex.c"
+"C:\temp\iclsip_172\sip\src\low\cx_sock6.c"
+"C:\temp\iclsip_172\sip\src\low\cx_thrd.c"
+"C:\temp\iclsip_172\sip\src\low\cx_timer.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D9.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1DA.tmp" with contents
+[
+/nologo /out:"..\lib\Debug\cx6d.lib" 
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_event.obj
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_mem.obj
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_misc.obj
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_mutex.obj
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_sock6.obj
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_thrd.obj
+\temp\iclsip_172\sip\src\temp\debug\low6\cx_timer.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1DA.tmp"
+<h3>Output Window</h3>
+Compiling...
+cx_event.c
+cx_mem.c
+fatal error C1083: Cannot open source file: 'C:\temp\iclsip_172\sip\src\low\cx_mem.c': No such file or directory
+cx_misc.c
+cx_mutex.c
+cx_sock6.c
+c:\temp\iclsip_172\sip\src\low\cx_sock6.c(23) : fatal error C1083: Cannot open include file: 'cx_ex/CxSocketEx.h': No such file or directory
+cx_thrd.c
+cx_timer.c
+Generating Code...
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+cx6d.lib - 2 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

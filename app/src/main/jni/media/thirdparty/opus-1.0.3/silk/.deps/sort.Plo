@@ -1,0 +1,100 @@
+silk/sort.lo: silk/sort.c config.h silk/SigProc_FIX.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/string.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/features.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdc-predef.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/predefs.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/cdefs.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wordsize.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs-soft.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stddef.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/xlocale.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string2.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdlib.h \
+ silk/typedef.h include/opus_types.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdint.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdint.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wchar.h \
+ silk/resampler_structs.h silk/macros.h silk/Inlines.h silk/MacroCount.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdio.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/types.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/typesizes.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/libio.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/_G_config.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/wchar.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdarg.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio_lim.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sys_errlist.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio.h \
+ silk/MacroDebug.h
+
+config.h:
+
+silk/SigProc_FIX.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/string.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/features.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdc-predef.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/predefs.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/cdefs.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wordsize.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs-soft.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stddef.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/xlocale.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string2.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdlib.h:
+
+silk/typedef.h:
+
+include/opus_types.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdint.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdint.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wchar.h:
+
+silk/resampler_structs.h:
+
+silk/macros.h:
+
+silk/Inlines.h:
+
+silk/MacroCount.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdio.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/types.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/typesizes.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/libio.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/_G_config.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/wchar.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdarg.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio_lim.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sys_errlist.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio.h:
+
+silk/MacroDebug.h:
