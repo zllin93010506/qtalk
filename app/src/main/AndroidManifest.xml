@@ -301,6 +301,12 @@
               </intent-filter>
         </receiver>
 
+        <receiver android:name="com.quanta.qtalk.ui.LogonStateReceiver">
+            <intent-filter>
+                <action android:name="com.quanta.qtalk.ui.logon.state" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
         <service
             android:name="com.quanta.qtalk.ui.QTService"
             android:enabled="true">
