@@ -53,7 +53,7 @@ public abstract class AbstractSetupActivity extends AbstractUiActivity{
                          //Write settings & re-login
                          engine.updateSetting(AbstractSetupActivity.this, settings);
                      }catch (FailedOperateException e) {
-                         //QTReceiver.notifyLogonState(AbstractSetupActivity.this,false,engine.getLogonName(),e.getMessage());
+                         //LogonStateReceiver.notifyLogonState(AbstractSetupActivity.this,false,engine.getLogonName(),e.getMessage());
                     	 
                     	 	 Log.e(DEBUGTAG,"updateSetting",e);
                          Toast.makeText(AbstractSetupActivity.this, e.toString(), Toast.LENGTH_LONG);

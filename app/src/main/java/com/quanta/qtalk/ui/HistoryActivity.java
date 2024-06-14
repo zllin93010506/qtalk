@@ -121,7 +121,7 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
 				//finish();
 				//overridePendingTransition(0, 0);
 				Log.d(DEBUGTAG,"reveive ACTION_CLOSE_SYSTEM_DIALOGS");
-			}else if(intent.getAction().equals(LauncherService.PHONE_NEW_NOTIFICATION)){
+			}else if(intent.getAction().equals(LauncherReceiver.PHONE_NEW_NOTIFICATION)){
 				Bundle bundle = intent.getExtras();
 				int count = bundle.getInt("NEW_ITEM");
 				if(count >0){
@@ -153,7 +153,7 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
 			public void run() {
 				if(!newNotification){
 					Intent intent = new Intent();
-			        intent.setAction(LauncherService.PHONE_QUERY_NOTIFICATION);
+			        intent.setAction(LauncherReceiver.PHONE_QUERY_NOTIFICATION);
 			        sendBroadcast(intent);
 			        mHandler.postDelayed(CheckNotificationCB, 5000);
 				}
@@ -240,10 +240,10 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
 
 		IntentFilter intentfilter = new IntentFilter();
 		intentfilter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-		intentfilter.addAction(LauncherService.PHONE_NEW_NOTIFICATION);
+		intentfilter.addAction(LauncherReceiver.PHONE_NEW_NOTIFICATION);
         registerReceiver(receiver, intentfilter);  
 		Intent intent = new Intent();
-        intent.setAction(LauncherService.PHONE_QUERY_NOTIFICATION);
+        intent.setAction(LauncherReceiver.PHONE_QUERY_NOTIFICATION);
         sendBroadcast(intent);
         mHandler.postDelayed(CheckNotificationCB, 5000);
         //---------------------------------------------------------------------[PT]

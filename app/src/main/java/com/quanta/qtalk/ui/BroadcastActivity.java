@@ -78,7 +78,7 @@ public class BroadcastActivity extends Activity {
 			if(intent.getAction().equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)){
 				//finish();
 				Log.d(DEBUGTAG,"reveive ACTION_CLOSE_SYSTEM_DIALOGS");
-			}else if(intent.getAction().equals(LauncherService.ACTION_VC_TTS_CB)){
+			}else if(intent.getAction().equals(LauncherReceiver.ACTION_VC_TTS_CB)){
 				mHandler.removeCallbacks(ttsCBtimeoutThread);
 				Bundle bundle = intent.getExtras();
 				String msg = bundle.getString("KEY_STATE");
@@ -176,7 +176,7 @@ public class BroadcastActivity extends Activity {
 		ttslist = new ArrayList<String>();
 		setContentView(R.layout.layout_broadcast);
 		Intent intent = new Intent();
-        intent.setAction(LauncherService.ACTION_GET_TTS);
+        intent.setAction(LauncherReceiver.ACTION_GET_TTS);
         sendBroadcast(intent);
 		String path = Hack.getStoragePath() + "ttsList";
 		try {
@@ -220,12 +220,12 @@ public class BroadcastActivity extends Activity {
 				tts_check_xlarge.setVisibility(View.INVISIBLE);
 			}
 			IntentFilter intentfilter = new IntentFilter();
-    		intentfilter.addAction(LauncherService.ACTION_VC_TTS_CB);
+    		intentfilter.addAction(LauncherReceiver.ACTION_VC_TTS_CB);
             registerReceiver(receiver, intentfilter); 
 			openTextDialog(getString(R.string.tts_sending));
 
 			Intent intent = new Intent();
-	        intent.setAction(LauncherService.ACTION_VC_TTS);
+	        intent.setAction(LauncherReceiver.ACTION_VC_TTS);
 	        Bundle bundle = new Bundle();
 	        bundle.putString("KEY_TTS_MSG" , ttsmessage);
 	        bundle.putStringArrayList("KEY_NS_ID", depID);

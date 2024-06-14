@@ -240,7 +240,7 @@ public final class Hack
 	}
 
 	public static boolean isPT() {
-		Log.d(DEBUGTAG, "isStation type="+QtalkSettings.type);
+		Log.d(DEBUGTAG, "isPT type="+QtalkSettings.type);
 		return QtalkSettings.type.equals("PATIENT");
 	}
 
@@ -369,7 +369,7 @@ public final class Hack
         else
             Log.d(DEBUGTAG, "start nursingapp:getPackageManager fail");
         */
-		Log.e(DEBUGTAG, "shoud not call nursingapp any more");
+		Log.e(DEBUGTAG, "should not call nursingapp any more");
 	}
 
 	public static Bitmap getBitmap(Context context, int resId){

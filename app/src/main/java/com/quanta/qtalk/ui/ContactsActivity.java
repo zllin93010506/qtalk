@@ -134,7 +134,7 @@ public class ContactsActivity extends AbstractContactsActivity{
 				//finish();
 				//overridePendingTransition(0, 0);
 				Log.d(DEBUGTAG,"reveive ACTION_CLOSE_SYSTEM_DIALOGS");
-			}else if(intent.getAction().equals(LauncherService.PHONE_NEW_NOTIFICATION)){
+			}else if(intent.getAction().equals(LauncherReceiver.PHONE_NEW_NOTIFICATION)){
 				newNotification = true;
 				Bundle bundle = intent.getExtras();
 				int count = bundle.getInt("NEW_ITEM");
@@ -179,7 +179,7 @@ public class ContactsActivity extends AbstractContactsActivity{
 		public void run() {
 			if(!newNotification){
 				Intent intent = new Intent();
-		        intent.setAction(LauncherService.PHONE_QUERY_NOTIFICATION);
+		        intent.setAction(LauncherReceiver.PHONE_QUERY_NOTIFICATION);
 		        sendBroadcast(intent);
 		        mHandler.postDelayed(CheckNotificationCB, 5000);
 			}
@@ -209,7 +209,7 @@ public class ContactsActivity extends AbstractContactsActivity{
 					File TTSListFile = new File(ttslist_url);
 					if (!TTSListFile.exists()) {
 						Intent intent = new Intent();
-						intent.setAction(LauncherService.ACTION_GET_TTS);
+						intent.setAction(LauncherReceiver.ACTION_GET_TTS);
 						sendBroadcast(intent);
 					}
         		}
@@ -348,7 +348,7 @@ public class ContactsActivity extends AbstractContactsActivity{
 			if(!TTSListFile.exists())
 			{
 				Intent intent = new Intent();
-		        intent.setAction(LauncherService.ACTION_GET_TTS);
+		        intent.setAction(LauncherReceiver.ACTION_GET_TTS);
 		        sendBroadcast(intent);  
 			}
 
@@ -990,11 +990,11 @@ public class ContactsActivity extends AbstractContactsActivity{
     		
     		IntentFilter intentfilter = new IntentFilter();
     		intentfilter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-    		intentfilter.addAction(LauncherService.PHONE_NEW_NOTIFICATION);
+    		intentfilter.addAction(LauncherReceiver.PHONE_NEW_NOTIFICATION);
             registerReceiver(receiver, intentfilter);  
             
 			Intent intent = new Intent();
-	        intent.setAction(LauncherService.PHONE_QUERY_NOTIFICATION);
+	        intent.setAction(LauncherReceiver.PHONE_QUERY_NOTIFICATION);
 	        sendBroadcast(intent);
 	        mHandler.postDelayed(CheckNotificationCB, 5000);
             //---------------------------------------------------------------------[PT]

@@ -186,7 +186,6 @@ public class QTService extends Service implements IQtalkEngineListener {
 					  if(mcontext!=null)
 						  mcontext.startForegroundService(deactivation);
 		          }
-
 	       		  break;
 	          case AvatarUpdate:
 	        	  //Log.d(DEBUGTAG," It's need to update phonebook!!");
@@ -283,7 +282,7 @@ public class QTService extends Service implements IQtalkEngineListener {
 										mEngine.login(QTService.this);
 								}
 							} catch (FailedOperateException e) {
-								QTReceiver.notifyLogonState(QTService.this, false,
+								LogonStateReceiver.notifyLogonState(QTService.this, false,
 										                    mEngine != null ? mEngine.getLogonName() : null,
 		                                                    getString(R.string.busy_network)+"\r\n"+getString(R.string.retry_msg)+"\r\n");
 								Log.e(DEBUGTAG, "onStart", e);
@@ -388,19 +387,19 @@ public class QTService extends Service implements IQtalkEngineListener {
 												  lastPhonebookFileTime, provisionID,
 												  provisionType,
 												  provisionServer, key);
-						boolean isNotifyLogonStateNative = QTReceiver.isNotifyLogonStateNative();
+						boolean isNotifyLogonStateNative = LogonStateReceiver.isNotifyLogonStateNative();
 						boolean SIPRunnablegetState = Flag.SIPRunnable.getState();
 						Log.e(DEBUGTAG, "1 isNotifyLogonStateNative="+isNotifyLogonStateNative+", SIPRunnablegetState="+SIPRunnablegetState);
 						if(!isNotifyLogonStateNative && !SIPRunnablegetState)
 						{
 							Flag.SIPRunnable.setState(true);
-							QTReceiver.notifyLogonState(QTService.this, true, null, "server is reachable", false);
+							LogonStateReceiver.notifyLogonState(QTService.this, true, null, "server is reachable", false);
 						}
 					} catch(ConnectException connex){
 						Log.e(DEBUGTAG, "ConnectException", connex);
 						if(Flag.SIPRunnable.getState()) {
 							Flag.SIPRunnable.setState(false);
-							QTReceiver.notifyLogonState(QTService.this, false, null, "server is unreachable", false);
+							LogonStateReceiver.notifyLogonState(QTService.this, false, null, "server is unreachable", false);
 						}
 					} catch (Exception e) {
 						Log.e(DEBUGTAG, "PhonebookrunnableThread", e);
@@ -503,7 +502,6 @@ public class QTService extends Service implements IQtalkEngineListener {
 			// intentfilter.addAction(Receiver.ACTION_SCO_AUDIO_STATE_CHANGED);
 			// intentfilter.addAction(Intent.ACTION_TIME_TICK);
 			registerReceiver(mReceiver = new QTReceiver(), intentfilter);
-			mReceiver.setQTService(this);
 		}
 	}
 
@@ -551,9 +549,9 @@ public class QTService extends Service implements IQtalkEngineListener {
 		if (ProvisionSetupActivity.debugMode)
 			Log.d(DEBUGTAG, "==>onLogonStateChange:state=" + state);
 		if (!state || mLogon != state) {
-			Log.d(DEBUGTAG,"QTReceiver.notifyLogonState");
+			Log.d(DEBUGTAG,"LogonStateReceiver.notifyLogonState");
 			mLogon = state;
-			QTReceiver.notifyLogonState(QTService.this, state,
+			LogonStateReceiver.notifyLogonState(QTService.this, state,
 					mEngine != null ? mEngine.getLogonName() : null, msg);
 		}
 		if (state)
@@ -978,19 +976,19 @@ public class QTService extends Service implements IQtalkEngineListener {
 					qtnMessenger.httpsConnect(phonebook_uri, session,
 							lastPhonebookFileTime, provisionID, provisionType,
 							provisionServer, key);
-                    boolean isNotifyLogonStateNative = QTReceiver.isNotifyLogonStateNative();
+                    boolean isNotifyLogonStateNative = LogonStateReceiver.isNotifyLogonStateNative();
                     boolean SIPRunnablegetState = Flag.SIPRunnable.getState();
                     //Log.e(DEBUGTAG, "2 isNotifyLogonStateNative="+isNotifyLogonStateNative+", SIPRunnablegetState="+SIPRunnablegetState);
                     if(!isNotifyLogonStateNative && !SIPRunnablegetState)
                     {
                         Flag.SIPRunnable.setState(true);
-                        QTReceiver.notifyLogonState(QTService.this, true, "server is reachable", null, false);
+                        LogonStateReceiver.notifyLogonState(QTService.this, true, "server is reachable", null, false);
                     }
 				} catch(ConnectException connex){
 					Log.e(DEBUGTAG, "ConnectException", connex);
 					if(Flag.SIPRunnable.getState()) {
 						Flag.SIPRunnable.setState(false);
-						QTReceiver.notifyLogonState(this, false, null, "server is unreachable", false);
+						LogonStateReceiver.notifyLogonState(this, false, null, "server is unreachable", false);
 					}
 				} catch (Exception e) {
 					Log.e(DEBUGTAG, "PhonebookrunnableThread", e);

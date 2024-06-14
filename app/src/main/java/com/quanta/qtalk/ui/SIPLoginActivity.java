@@ -65,7 +65,7 @@ public class SIPLoginActivity extends AbstractSetupActivity
                 	if (ProvisionSetupActivity.debugMode)  Log.e(DEBUGTAG,"Login successful.");
                 	if (Flag.Activation.getState()==true)
                 	{
-                		QTReceiver.notifyLogonState(getApplicationContext(), true, null, "PTVC");
+                		LogonStateReceiver.notifyLogonState(getApplicationContext(), true, null, "PTVC");
                 		if(QtalkSettings.Login_by_launcher==true){
                 			//------------------------------------------------------------[PT]
     	                    Intent broadcast_intent = new Intent();

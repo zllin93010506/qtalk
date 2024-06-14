@@ -1,21 +1,13 @@
 package com.quanta.qtalk;
 
-import java.io.File;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Vector;
-
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
@@ -30,17 +22,21 @@ import com.quanta.qtalk.call.MDP;
 import com.quanta.qtalk.media.MediaEngine;
 import com.quanta.qtalk.provision.ProvisionUtility.ProvisionInfo;
 import com.quanta.qtalk.ui.BusyCallActivity;
+import com.quanta.qtalk.ui.LogonStateReceiver;
 import com.quanta.qtalk.ui.ProvisionSetupActivity;
-import com.quanta.qtalk.ui.QTReceiver;
 import com.quanta.qtalk.ui.QTService;
 import com.quanta.qtalk.ui.QThProvisionUtility;
-import com.quanta.qtalk.ui.QtalkCheckActivity2;
 import com.quanta.qtalk.ui.RingingUtil;
 import com.quanta.qtalk.util.DeviceIDUtility;
 import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
 import com.quanta.qtalk.util.PortManager;
 import com.quanta.qtalk.util.QtalkUtility;
+
+import java.io.File;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Vector;
 
 public class QtalkEngine implements ICallEngineListener {
     public static final boolean ENABLE_LOG = false;
@@ -61,7 +57,6 @@ public class QtalkEngine implements ICallEngineListener {
     private QtalkLogManager mQtalkLogManager = null;
     public static final String LOG_FILE_NAME = "viro.log";
     public static final String UPLOAD_FOLDER_NAME = "viro_log";
-    public static final String QTSERVICE_NAME = "com.quanta.qtalk.ui.QTService";
     private boolean mPreSipLogin = false;
     private Context mContext = null;
 
@@ -243,10 +238,6 @@ public class QtalkEngine implements ICallEngineListener {
             Log.d(DEBUGTAG, "NetworkInfo info null, set default network type :" + network_type);
         }
 
-        // int outbound_proxy_port =
-        // preference.getInt(QtalkPreference.SETTING_OUTBOUND_PROXY_PORT, 5060);
-        // int local_singaling_port =
-        // preference.getInt(QtalkPreference.SETTING_LOCAL_SIGNALING_PORT, 5060);
         PortManager.setAudioPortRange(min_audio_port, max_audio_port);
         PortManager.setVideoPortRange(min_video_port, max_video_port);
 
@@ -267,16 +258,10 @@ public class QtalkEngine implements ICallEngineListener {
             if (authentication_id != null && user_id != null && password != null && realm_server != null
                     && outbound_proxy != null && proxy != null) {
                 mLoginSuccess = false;
-                // if (mCallEngine == null)
-                // mCallEngine =
-                // CloudCallEngineFactory.createCallEngine(context,CloudCallEngineFactory.CALL_ENGINE_CLIENT_SIP);
+
                 if (mCallEngine == null)
                     mCallEngine = CallEngineFactory.createCallEngine(PortManager.getSIPPort());
-                // if (mCallEngine==null)
-                // mCallEngine =
-                // CallEngineFactory.createCallEngine(CallEngineFactory.CALL_ENGINE_SMACK,
-                // MediaEngine.getAudioMDP(),MediaEngine.getAudioPort(),
-                // MediaEngine.getVideoMDP(),MediaEngine.getVideoPort());
+
                 mCallEngine.login(outbound_proxy, proxy, realm_server, port, user_id, authentication_id, password,
                         expire_time, this, display_name, registrar_server, prack_support, network_type);
                 mLoginName = authentication_id;
@@ -970,20 +955,20 @@ public class QtalkEngine implements ICallEngineListener {
                         if (ProvisionSetupActivity.debugMode)
                             Log.d(DEBUGTAG, "clear mCallTable");
                     }
-                    QTReceiver.notifyLogonState(mContext, state,
+                    LogonStateReceiver.notifyLogonState(mContext, state,
                             null, msg);
                 } else if (state && !Flag.SIPRunnable.getState()) {
                     if (ProvisionSetupActivity.debugMode)
                         Log.e(DEBUGTAG, "==>onLogonState:" + state + "sip un-connect");
                     Flag.SIPRunnable.setState(true);
-                    QTReceiver.notifyLogonState(mContext, state,
+                    LogonStateReceiver.notifyLogonState(mContext, state,
                             null, msg);
                 }
                 if (state == true && mPreSipLogin == false) { // for PT
-                    QTReceiver.notifyLogonState(mContext, true, null, "QSPT-VC");
+                    LogonStateReceiver.notifyLogonState(mContext, true, null, "QSPT-VC");
                     mPreSipLogin = true;
                 } else if (Hack.isPhone()) {
-                    QTReceiver.notifyLogonState(mContext, state,
+                    LogonStateReceiver.notifyLogonState(mContext, state,
                             null, msg);
                 }
 
@@ -1449,16 +1434,4 @@ public class QtalkEngine implements ICallEngineListener {
         }
         return false;
     }
-
-    public static void StartQTService(Context context) {
-
-        if (!(QtalkEngine.isServiceExisted(context, QTSERVICE_NAME))) {
-            Log.d(DEBUGTAG, "QTService is not exist, startQTService ");
-            context.startForegroundService(new Intent(context, QTService.class));
-        } else {
-            Log.d(DEBUGTAG, "QTService is exist but start again");
-            context.startForegroundService(new Intent(context, QTService.class));
-        }
-    }
-
 }

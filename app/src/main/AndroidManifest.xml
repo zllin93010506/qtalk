@@ -298,6 +298,34 @@
                 <action android:name="android.intent.action.vc.login"/>    
                 <action android:name="android.intent.action.vc.logout" />  
                 <action android:name="android.intent.action.vc.message" />
+                <action android:name="android.intent.action.vc.login" />
+                <action android:name= "android.intent.action.vc.message" />
+                <action android:name="android.intent.action.vc.get.login.data" />
+                <action android:name="android.intent.action.vc.return.login.data" />
+                <action android:name="android.intent.action.vc.makecall" />
+                <action android:name="android.intent.action.vc.makecall.cb" />
+                <action android:name="android.intent.action.vc.nurse.call" />
+                <action android:name="android.intent.action.vc.logout" />
+                <action android:name="android.intent.action.vc.tts.list" />
+                <action android:name="android.intent.action.vc.tts" />
+                <action android:name="android.intent.action.vc.tts.cb" />
+                <action android:name="android.intent.action.vc.contacts" />
+                <action android:name="android.intent.action.vc.history" />
+                <action android:name="android.intent.action.vc.logon.state" />
+                <action android:name="android.intent.action.vc.logon.state.cb" />
+                <action android:name="android.intent.action.vc.alarm" />
+                <action android:name="android.intent.action.ptms.tts" />
+                <action android:name="android.intent.action.qlauncher.notification.count" />
+                <action android:name="android.intent.action.qlauncher.notification.query" />
+                <action android:name="android.intent.action.tts.broadcast.msg" />
+                <action android:name="com.quanta.qspt.handset.pickup" />
+                <action android:name="com.quanta.qspt.handset.hangup" />
+                <action android:name="pta.rq.1" />
+                <action android:name="pta.rc.1" />
+                <action android:name="pta.resource.change" />
+                <action android:name="android.intent.action.vc.login.cb" />
+                <action android:name="android.intent.action.vc.logout.cb.login.after" />
+                <action android:name="android.intent.action.vc.logout.cb" />
               </intent-filter>
         </receiver>
 
@@ -310,11 +338,6 @@
         <service
             android:name="com.quanta.qtalk.ui.QTService"
             android:enabled="true">
-        </service>        
-        <service android:name="com.quanta.qtalk.ui.LauncherService" android:process=":newprocess" android:enabled="true" android:exported="true">
-            <intent-filter >
-                <action android:name="com.quanta.qtalk.ui.LauncherService"/>
-            </intent-filter>
         </service>
         <service
             android:name="com.quanta.qtalk.ui.CommandService"

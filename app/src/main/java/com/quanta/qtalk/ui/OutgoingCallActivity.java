@@ -73,7 +73,7 @@ public class OutgoingCallActivity extends AbstractOutgoingCallActivity
         	Log.d(DEBUGTAG,"==>onResume "+this.hashCode());
             super.onResume();
 			Intent intent = new Intent();
-	        intent.setAction(LauncherService.ACTION_VC_MAKE_CALL_CB);
+	        intent.setAction(LauncherReceiver.ACTION_VC_MAKE_CALL_CB);
 	        sendBroadcast(intent);
             Log.d(DEBUGTAG,"<==onResume "+this.hashCode());
         }

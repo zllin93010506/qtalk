@@ -268,7 +268,7 @@ public class QTReceiver extends BroadcastReceiver
 	        			Log.d(DEBUGTAG , "Network change!!(wifi to 3G)");
 	        			if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG, "prev_ip="+prev_ip+"   now_ip="+now_ip);
 	        			if(prev_ip.equals(nonetwork)){
-	        				QtalkEngine.StartQTService(context);
+	        				QTReceiver.StartQTService(context);
 	        			}
 	        			mEngine.sr2_switch_network_interface(1, now_ip);
 	        			prev_ip = new String(now_ip);
@@ -287,7 +287,7 @@ public class QTReceiver extends BroadcastReceiver
 	        			if(now_ip==null) // for HTC 
 	        				now_ip = "";
 	        			if(prev_ip.equals(nonetwork)&&!now_ip.equals("")){
-	        				QtalkEngine.StartQTService(context);
+	        				QTReceiver.StartQTService(context);
 	        			}
 	        			mEngine.sr2_switch_network_interface(2, now_ip);
 	        			prev_ip = new String(now_ip);
@@ -304,7 +304,7 @@ public class QTReceiver extends BroadcastReceiver
 	        			Log.d(DEBUGTAG, "Network change to ETH!!");
 	        			if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG, "prev_ip="+prev_ip+"   now_ip="+now_ip);
 	        			if(prev_ip.equals("has been no network, sip may no login")){
-	        				QtalkEngine.StartQTService(context);
+	        				QTReceiver.StartQTService(context);
 	        			}
 	        			mEngine.sr2_switch_network_interface(3, now_ip);
 	        			prev_ip = new String(now_ip);
@@ -368,7 +368,7 @@ public class QTReceiver extends BroadcastReceiver
             mEngine = QtalkEngine.getInstance();
         }
         if (isStartService && !(context instanceof QTService)) {
-        	QtalkEngine.StartQTService(context);
+        	QTReceiver.StartQTService(context);
         }
         return mEngine;
     }
@@ -443,7 +443,6 @@ public class QTReceiver extends BroadcastReceiver
     public static final String ACTION_DIALER            = "com.quanta.qtalk.ui.dialer";
     public static final String ACTION_VIDEO_SESSION     = "com.quanta.qtalk.ui.videosession";
     public static final String ACTION_AUDIO_SESSION     = "com.quanta.qtalk.ui.audiosession";
-    public static final String ACTION_LOGON_STATE       = "com.quanta.qtalk.ui.logon.state";
     public static final String ACTION_RESUME            = "com.quanta.qtalk.ui.resume";
     public static final String ACTION_LOGIN_RETRY       = "com.quanta.qtalk.ui.login.retry";
     public static final String ACTION_SIP_LOGIN         = "com.quanta.qtalk.ui.login.sip";
@@ -508,54 +507,7 @@ public class QTReceiver extends BroadcastReceiver
     public static final String KEY_VIDEO_SRTP_SEND_KEY		= "VIDEO_SRTP_SEND_KEY";
     public static final String KEY_VIDEO_SRTP_RECEIVE_KEY		= "VIDEO_SRTP_RECEIVE_KEY";
     public static final String KEY_VIDEO_ENABLE_CAMERA_MUTE        = "VIDEO_ENABLE_CAMERA_MUTE";
-    public static String logon_msg = "";
-    public static boolean logon_state = false;
-    
-    private static boolean isNative = true;
-    
-    public static void notifyLogonState(final Context context,final boolean state,final String loginID,final String msg, boolean isNative)
-    {        
-        Log.d(DEBUGTAG, "notifyLogonState state:"+state+", loginID:"+loginID+", msg:"+msg + ", isNative:"+isNative  + ", context==null:"+(context==null));
-        String login_id =  loginID;
-        if(login_id==null)
-            login_id = "QSPT-VC";
-        logon_state = state;
-        if(state)
-        	logon_msg = login_id;
-        else
-        	logon_msg = msg;
-     
-        if(context!=null) {
-	        Intent intent = new Intent();
-	        if(!Hack.isPhone()) {
-		        intent.setAction(QTReceiver.ACTION_LOGON_STATE);//TODO: Resume Applicaiton 
-		        // create bundle & Assign Bundle to Intent
-		        Bundle bundle = new Bundle();
-		        bundle.putBoolean(QTReceiver.KEY_LOGON_STATE , state);
-		        bundle.putString(QTReceiver.KEY_LOGON_ID , login_id);
-		        bundle.putString(QTReceiver.KEY_LOGON_MSG , msg);
-		        intent.putExtras(bundle);
-		        // start Activity Class
-		        context.sendBroadcast(intent);
-	        }
-	        else {
-		        intent.setAction(LauncherService.ACTION_VC_LOGON_STATE);
-				context.sendBroadcast(intent);
-				Log.d(DEBUGTAG, "send " + LauncherService.ACTION_VC_LOGON_STATE);
-	        }
-        }
-        QTReceiver.isNative = isNative;
-    }
-    
-    public static void notifyLogonState(final Context context,final boolean state,final String loginID,final String msg)
-    {
-        notifyLogonState(context, state, loginID, msg, true);
-    }
-    
-    public static boolean isNotifyLogonStateNative()
-    {
-        return isNative;
-    }
+
     
     //UI Related
     protected static void startIncomingCallActivity(final Context context,final String callID,final  String remoteID, final boolean enableVideo)
@@ -849,5 +801,16 @@ public class QTReceiver extends BroadcastReceiver
         }
         else
         	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"showRetryActivity isViroForeGround = false");
+    }
+	public static final String QTSERVICE_NAME = "com.quanta.qtalk.ui.QTService";
+    public static void StartQTService(Context context) {
+
+        if (!(QtalkEngine.isServiceExisted(context, QTSERVICE_NAME))) {
+            Log.d(DEBUGTAG, "QTService is not exist, startQTService ");
+            context.startForegroundService(new Intent(context, QTService.class));
+        } else {
+            Log.d(DEBUGTAG, "QTService is exist but start again");
+            context.startForegroundService(new Intent(context, QTService.class));
+        }
     }
 }

@@ -38,7 +38,7 @@ public class QTRAAlarm extends BroadcastReceiver
 	                    PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF_EDGE, DEFAULT_EDGE))
 	                    && Flag.SIPRunnable.getState() == true) {
 	    	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG, "onReceive QTRAAlarm  startForegroundService QTService."+Flag.SIPRunnable.getState());
-	    		QtalkEngine.StartQTService(context);
+	    		QTReceiver.StartQTService(context);
 	    		//context.startForegroundService(new Intent(context,QTService.class));
 	            if (QTReceiver.engine(context,false).isLogon())
 	                QTReceiver.engine(context,false).keepAlive(context);

@@ -233,7 +233,7 @@ public class ProvisionLoginActivity extends AbstractSetupActivity
                 		{
                 			FileUtility.delFolder(Storage);
                 			Intent intent = new Intent();
-                	        intent.setAction(LauncherService.PTA_OP_GET);
+                	        intent.setAction(LauncherReceiver.PTA_OP_GET);
                 	        sendBroadcast(intent);                			
                 		}
                         
