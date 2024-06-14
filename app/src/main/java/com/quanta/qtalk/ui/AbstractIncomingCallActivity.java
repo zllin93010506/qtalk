@@ -57,7 +57,7 @@ public abstract class AbstractIncomingCallActivity extends AbstractCallTimerActi
 			bundle.putInt("KEY_COMMAND", CommandService.command_playsound);
 			Intent myIntent = new Intent(this, CommandService.class);
 			myIntent.putExtras(bundle);
-			this.startForegroundService(myIntent);
+			this.startService(myIntent);
         }
         else {
             this.finish();

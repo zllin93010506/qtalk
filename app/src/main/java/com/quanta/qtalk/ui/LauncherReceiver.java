@@ -97,7 +97,7 @@ public class LauncherReceiver extends BroadcastReceiver {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_COMMAND, CommandService.command_handsethangup);
         myIntent.putExtras(bundle);
-        context.startForegroundService(myIntent);
+        context.startService(myIntent);
 
         try {
             Thread.sleep(500);
@@ -112,7 +112,7 @@ public class LauncherReceiver extends BroadcastReceiver {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_COMMAND, CommandService.command_handsetpickup);
         myIntent.putExtras(bundle);
-        context.startForegroundService(myIntent);
+        context.startService(myIntent);
     }
 
     private void handleReceive(Context context, Intent intent) {
@@ -122,7 +122,7 @@ public class LauncherReceiver extends BroadcastReceiver {
 		bundle_test.putInt("KEY_COMMAND", CommandService.command_test);
 		bundle_test.putString("source", DEBUGTAG);
 		testIntent.putExtras(bundle_test);
-		context.startForegroundService(testIntent);
+		context.startService(testIntent);
 		Log.d(DEBUGTAG,"send testcommand");
 		*/
         final String action = intent.getAction();
@@ -133,12 +133,12 @@ public class LauncherReceiver extends BroadcastReceiver {
                 TextUtils.equals(action, Intent.ACTION_USER_PRESENT) ||
                 TextUtils.equals(action, QtalkAction.ACTION_APP_START)) {
             Intent myIntent = new Intent(context, LauncherReceiver.class);
-            context.startForegroundService(myIntent);
+            context.startService(myIntent);
         } else if (TextUtils.equals(action, LauncherReceiver.ACTION_VC_MESSAGE)) {
             Intent myIntent = new Intent(context, CommandService.class);
             mBundle = intent.getExtras();
             myIntent.putExtras(mBundle);
-            context.startForegroundService(myIntent);
+            context.startService(myIntent);
         } else if (TextUtils.equals(action, LauncherReceiver.ACTION_VC_LOGIN) || TextUtils.equals(action, LauncherReceiver.ACTION_VC_RETURN_LOGIN_DATA)) {
             Log.d(DEBUGTAG, "isDeactive: " + isDeactivate + ", isLogin:" + isLogin + ", Action: " + action);
             mBundle = intent.getExtras();
@@ -187,7 +187,7 @@ public class LauncherReceiver extends BroadcastReceiver {
                     logout_bundle.putBoolean(KEY_MOBILE, true);
                 logout_bundle.putBoolean("KEY_START_ACTIVITY", mBundle.getBoolean("KEY_START_ACTIVITY"));
                 myIntent.putExtras(logout_bundle);
-                context.startForegroundService(myIntent);
+                context.startService(myIntent);
                 Hack.startNursingApp(context);
                 isForcedLogin = true;
             } else {
@@ -217,7 +217,7 @@ public class LauncherReceiver extends BroadcastReceiver {
                 Intent MakeCallIntent = new Intent(context, CommandService.class);
                 bundle.putInt(KEY_COMMAND, CommandService.command_makecall);
                 MakeCallIntent.putExtras(bundle);
-                context.startForegroundService(MakeCallIntent);
+                context.startService(MakeCallIntent);
             }
         } else if (TextUtils.equals(action, LauncherReceiver.ACTION_VC_NURSE_CALL)) {
             synchronized (makecallLock) {
@@ -247,7 +247,7 @@ public class LauncherReceiver extends BroadcastReceiver {
                         bundle.putInt(KEY_COMMAND, CommandService.command_nursecall);
                         Intent myIntent = new Intent(context, CommandService.class);
                         myIntent.putExtras(bundle);
-                        context.startForegroundService(myIntent);
+                        context.startService(myIntent);
                     } else {
                         Log.d(DEBUGTAG, "<error> KEY_NURSE_UID is NULL");
                     }
@@ -265,7 +265,7 @@ public class LauncherReceiver extends BroadcastReceiver {
                 if (Hack.isPhone())
                     mBundle.putBoolean(KEY_MOBILE, TextUtils.equals(action, "android.intent.action.vc.logout.cb.login.after"));
                 myIntent.putExtras(mBundle);
-                context.startForegroundService(myIntent);
+                context.startService(myIntent);
                 isDeactivate = false;
             } else {
                 Log.e(DEBUGTAG, "<error> no Bundle for login when screen on");
@@ -279,7 +279,7 @@ public class LauncherReceiver extends BroadcastReceiver {
                 Bundle sleep_bundle = new Bundle();
                 sleep_bundle.putInt(KEY_COMMAND, CommandService.command_sleep);
                 myIntent.putExtras(sleep_bundle);
-                context.startForegroundService(myIntent);
+                context.startService(myIntent);
             }
         } else if (TextUtils.equals(action, Intent.ACTION_SCREEN_ON)) {
             Log.d(DEBUGTAG, "do ACTION_SCREEN_ON");
@@ -289,7 +289,7 @@ public class LauncherReceiver extends BroadcastReceiver {
                 Bundle wake_bundle = new Bundle();
                 wake_bundle.putInt(KEY_COMMAND, CommandService.command_wake);
                 myIntent.putExtras(wake_bundle);
-                context.startForegroundService(myIntent);
+                context.startService(myIntent);
             }
         } else if (TextUtils.equals(action, "android.intent.action.vc.logout.cb")) {
 
@@ -305,7 +305,7 @@ public class LauncherReceiver extends BroadcastReceiver {
             if (Hack.isPhone())
                 logout_bundle.putBoolean(KEY_MOBILE, TextUtils.equals(action, LauncherReceiver.ACTION_VC_LOGOUT));
             myIntent.putExtras(logout_bundle);
-            context.startForegroundService(myIntent);
+            context.startService(myIntent);
         } else if (TextUtils.equals(action, LauncherReceiver.ACTION_VC_TTS_LIST)) {
             Bundle bundle = intent.getExtras();
 			/*if(bundle!=null){
@@ -363,14 +363,14 @@ public class LauncherReceiver extends BroadcastReceiver {
             bundle.putInt(KEY_COMMAND, CommandService.command_logonstate);
             Intent myIntent = new Intent(context, CommandService.class);
             myIntent.putExtras(bundle);
-            context.startForegroundService(myIntent);
+            context.startService(myIntent);
         } else if (TextUtils.equals(action, LauncherReceiver.HISTORY_TTS_FROM_LAUNCHER)) {
             Bundle bundle = new Bundle();
             bundle = intent.getExtras();
             bundle.putInt(KEY_COMMAND, CommandService.command_ttslog);
             Intent myIntent = new Intent(context, CommandService.class);
             myIntent.putExtras(bundle);
-            context.startForegroundService(myIntent);
+            context.startService(myIntent);
 
         } else if (TextUtils.equals(action, LauncherReceiver.HANDSET_PICKUP)) {
             pickupCall(context, intent);
@@ -396,7 +396,7 @@ public class LauncherReceiver extends BroadcastReceiver {
             bundle.putInt(KEY_COMMAND, CommandService.command_resourcechanged);
             bundle.putString(KEY_RESOURCE_CHANGED, changedResource);
             myIntent.putExtras(bundle);
-            context.startForegroundService(myIntent);
+            context.startService(myIntent);
         } else if (TextUtils.equals(action, LauncherReceiver.ACTION_GET_TTS)) {
             Log.d(DEBUGTAG, "ACTION_GET_TTS received");
             updateTTS();
@@ -414,7 +414,7 @@ public class LauncherReceiver extends BroadcastReceiver {
 			Bundle alarmBundle = new Bundle();
 			alarmBundle.putInt(KEY_COMMAND, CommandService.command_alarm);
 			alarmIntent.putExtras(alarmBundle);
-			context.startForegroundService(alarmIntent);
+			context.startService(alarmIntent);
 			 */
         }
 
@@ -689,7 +689,7 @@ public class LauncherReceiver extends BroadcastReceiver {
         rbundle.putString("KEY_DEVICEID", QtalkSettings.tts_deviceId);
         rbundle.putString("KEY_PTMSSERVER", QtalkSettings.ptmsServer);
         rbIntent.putExtras(rbundle);
-        context.startForegroundService(rbIntent);
+        context.startService(rbIntent);
     }
 
     protected void updateTTS() {

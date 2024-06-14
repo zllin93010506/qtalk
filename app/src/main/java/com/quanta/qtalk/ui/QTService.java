@@ -184,7 +184,7 @@ public class QTService extends Service implements IQtalkEngineListener {
 					  bundle.putString("KEY_LOGIN_AFTER", "NO");
 					  deactivation.putExtras(bundle);
 					  if(mcontext!=null)
-						  mcontext.startForegroundService(deactivation);
+						  mcontext.startService(deactivation);
 		          }
 	       		  break;
 	          case AvatarUpdate:
@@ -301,20 +301,8 @@ public class QTService extends Service implements IQtalkEngineListener {
 	private void startForegroundNotification(){
 		Log.d(DEBUGTAG, "start foreground service");
 
-		String CHANNEL_ID = "PhoneApp";
-		NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-				CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
-		((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
-		channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-		channel.setSound(null, null);
-		Notification notification = new Notification.Builder(this, CHANNEL_ID)
-				.setWhen(System.currentTimeMillis())
-				.setSmallIcon(R.drawable.qspt_app)
-				.setContentTitle("QTService")
-				.setPriority(Notification.PRIORITY_LOW)
-				.setGroup("qtalk_server")
-				.setContentText("").build();
-		startForeground(3333, notification);
+		Notification notification = LogonStateReceiver.buildNotification(this, 0, "", "");
+		startForeground(QTReceiver.NOTIFICATION_ID_LOGON, notification);
 	}
 	
 	@Override

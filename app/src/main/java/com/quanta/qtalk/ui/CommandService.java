@@ -19,7 +19,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.preference.PreferenceManager;
-import android.service.notification.NotificationListenerService;
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.widget.Toast;
@@ -31,6 +30,7 @@ import com.quanta.qtalk.QtalkAction;
 import com.quanta.qtalk.QtalkDB;
 import com.quanta.qtalk.QtalkEngine;
 import com.quanta.qtalk.QtalkSettings;
+import com.quanta.qtalk.R;
 import com.quanta.qtalk.provision.FileUtility;
 import com.quanta.qtalk.provision.PackageChecker;
 import com.quanta.qtalk.provision.PackageVersionUtility;
@@ -41,9 +41,6 @@ import com.quanta.qtalk.ui.history.HistoryManager;
 import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
 import com.quanta.qtalk.util.PtmsData;
-import com.quanta.qtalk.R;
-
-import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,9 +48,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-public class CommandService extends NotificationListenerService {
+public class CommandService extends Service {
     private final static String DEBUGTAG = "QSE_CommandService";
 
     private static Context mContext;
@@ -263,13 +258,6 @@ public class CommandService extends NotificationListenerService {
         myintent.setClass(CommandService.this, LauncherReceiver.class);
         myintent.setAction(QtalkAction.ACTION_APP_START);
         sendBroadcast(myintent);
-        /*
-         * Intent myIntent = new Intent(this, CommandService.class); Bundle
-         * bundle_test = new Bundle(); bundle_test.putInt("KEY_COMMAND",
-         * CommandService.command_test); bundle_test.putString("source",
-         * DEBUGTAG); myIntent.putExtras(bundle_test); startForegroundService(myIntent);
-         * Log.d(DEBUGTAG,"send testcommand");
-         */
 
         String string = PackageVersionUtility.getVersion(this);
         if (ProvisionSetupActivity.debugMode)
@@ -280,9 +268,6 @@ public class CommandService extends NotificationListenerService {
         QtalkEngine my_engine = QTReceiver.engine(this, false);
 
         boolean flag = true;
-        // if (Hack.isPhone()) {
-        // flag = Hack.isScreenOn(CommandService.this);
-        // }
 
         Log.d(DEBUGTAG,
                 "my_engine:" + my_engine + ", my_engine.isLogon():" + my_engine.isLogon()
@@ -794,7 +779,7 @@ public class CommandService extends NotificationListenerService {
         } else
             Log.e(DEBUGTAG, "no KEY_COMMAND");
 
-        startForegroundNotification();
+        //startForegroundNotification();
         return START_STICKY;
     }
 

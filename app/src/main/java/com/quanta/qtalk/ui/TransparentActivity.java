@@ -46,7 +46,7 @@ public class TransparentActivity extends Activity {
 		Intent i = new Intent();
 		i.setComponent(new ComponentName("com.quanta.qtalk", "com.quanta.qtalk.ui.CommandService"));
 		i.putExtras(b);
-		startForegroundService(i);
+		startService(i);
 		Log.d(DEBUGTAG, "start myservice");
 		finishAffinity();
 	}

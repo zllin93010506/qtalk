@@ -430,7 +430,7 @@ public class QTReceiver extends BroadcastReceiver
 //    public static final int NOTIFICATION_ID_MISSED_CALL = 1;
 //    public static final int NOTIFICATION_ID_ONLINE      = 2;
 //    public static final int NOTIFICATION_ID_OFFLINE     = 3;
-    public static final int NOTIFICATION_ID_LOGON       = 0;
+    public static final int NOTIFICATION_ID_LOGON       = 3333;
     public static final int NOTIFICATION_ID_CALLLOG     = 1;
     //==================================================================================
     public static final String ACTION_INCOMING_CALL     = "com.quanta.qtalk.ui.incomingcall";

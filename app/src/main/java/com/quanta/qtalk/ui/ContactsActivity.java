@@ -1426,22 +1426,13 @@ public class ContactsActivity extends AbstractContactsActivity{
 			}
 		}
 		if(callseq!=null){
-			/*
-			Intent myIntent = new Intent(this, CommandService.class);
-			Bundle bundle_test = new Bundle();
-			bundle_test.putInt("KEY_COMMAND", CommandService.command_test);
-			bundle_test.putString("source", DEBUGTAG);
-			myIntent.putExtras(bundle_test);
-			startForegroundService(myIntent);
-			Log.d(DEBUGTAG,"send testcommand");
-			*/
 			Bundle bundle = new Bundle();
 			bundle.putInt("KEY_COMMAND", 3);
 			bundle.putString("KEY_NURSE_UID" , callseq);
 	        bundle.putInt("KEY_TIMEOUT" , 10);
 			Intent intent = new Intent(mContext,CommandService.class);
 			intent.putExtras(bundle);
-			mContext.startForegroundService(intent);
+			mContext.startService(intent);
 		}
 	}
 	
