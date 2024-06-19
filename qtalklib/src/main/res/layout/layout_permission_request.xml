@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_gravity="center">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/dialogTitleTextView"
+        android:layout_gravity="center_vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:text="Phoneapp Permissions"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:paddingLeft="16dp"
+        android:background="#2d8448" />
+
+    <!-- Separator line -->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#cacaca" />
+
+    <!-- Content -->
+    <TextView
+        android:id="@+id/permissionMessageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="#4d4d4d"
+        android:text="@string/permission_request_dialog_content"
+        android:textSize="14sp" />
+
+    <!-- Separator line -->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#cacaca" />
+
+    <!-- Button -->
+    <Button
+        android:id="@+id/requestPermissionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/start"
+        android:textSize="12sp"
+        android:textColor="#2d8448"
+        android:elevation="4dp"
+        android:layout_margin="16dp"
+        android:padding="10dp"
+        android:onClick="ClickHandler"
+        android:background="#ffffff" />
+
+</LinearLayout>

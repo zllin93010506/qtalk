@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <color name="textColor">#ff47DAD1</color>
+        <color name="videosessionblue_bg">#225e7c</color>
+	<color name="transparent">#00000000</color>
+    </resources>
+

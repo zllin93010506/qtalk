@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="fill_parent" 
+  android:layout_height="fill_parent" 
+  android:id="@+id/layout_dialer"
+  android:background="#fdeeda"> 
+  <RelativeLayout 
+  	android:id="@+id/layout_dialer_title"
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:background="@drawable/img_call_tab_top"
+	android:gravity="center"
+	android:layout_alignParentTop="true"
+	android:layout_centerHorizontal="true">     
+    <TextView
+    	android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/keypad"
+        style="@style/TabTitle" />	
+  </RelativeLayout>
+    
+			<RelativeLayout 
+				  android:id="@+id/layout_dialer_input"
+				  android:layout_width="fill_parent" 
+				  android:layout_height="wrap_content" 
+				  android:layout_below="@id/layout_dialer_title"
+				  android:layout_centerHorizontal="true"> 
+				  
+				    	<TextView 
+							android:id="@+id/inputNum" 
+							android:layout_centerVertical="true"
+							android:layout_alignParentLeft="true"
+							android:maxLength="14"
+							style="@style/DialNum"	
+									
+						/>	
+						<ImageButton
+							android:id="@+id/delete_inputNum"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentRight="true"
+							android:background="@null"
+							android:src="@drawable/selector_dial_backspace" />
+
+		    </RelativeLayout>
+
+<!-- call out buttons END-->
+   	   	
+   	
+
+
+ <!-- Keypad  android:layout_centerInParent="true"-->
+     <RelativeLayout 
+		  android:layout_width="wrap_content" 
+		  android:layout_height="wrap_content" 
+		  android:id="@+id/layout_dialer_keypads"
+		  android:layout_below="@id/layout_dialer_input"		  
+		  android:layout_centerHorizontal="true"
+		  android:layout_marginTop="0dip"
+		  
+		  > 
+		  <LinearLayout 
+		       android:id="@+id/pad_line1"
+		       android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:orientation="horizontal">
+ 			<Button 
+			   android:id="@+id/keypad1"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginBottom="0dip"
+			   android:gravity="center"
+			   android:layout_weight="1"
+			   android:text="1"
+			   style="@style/DialPad"
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad2"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			    android:layout_marginLeft="0dip"
+				android:layout_marginRight="0dip"
+				android:layout_marginBottom="0dip"
+				android:layout_weight="1"
+			   android:text="2"
+			   style="@style/DialPad"
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad3"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="3"
+			   style="@style/DialPad"
+		   	/>
+		   	</LinearLayout>
+		   	<!-- 456 -->
+		   	<LinearLayout 
+		   	    android:id="@+id/pad_line2"
+		       android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:layout_below="@id/pad_line1"
+			   android:orientation="horizontal">
+		   	<Button 
+			   android:id="@+id/keypad4"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="4"
+			   style="@style/DialPad"		   
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad5"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			     android:layout_marginLeft="0dip"
+				android:layout_marginRight="0dip"
+				android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="5"
+			   style="@style/DialPad"					
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad6"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="6"
+			   style="@style/DialPad"				   
+		   	/>
+		   	</LinearLayout>
+		   	<!-- 789 -->
+		   	<LinearLayout 
+		   	    android:id="@+id/pad_line3"
+		       android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:layout_below="@id/pad_line2"
+			   android:orientation="horizontal">		   	
+		   	<Button 
+			   android:id="@+id/keypad7"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="7"
+			   style="@style/DialPad"
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad8"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginLeft="0dip"
+				android:layout_marginRight="0dip"
+				android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="8"
+			   style="@style/DialPad"					
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad9"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_marginBottom="0dip"
+			   android:layout_weight="1"
+			   android:text="9"
+			   style="@style/DialPad"	
+		   	/>
+		   	</LinearLayout>
+		   	<!--  -->
+		   	<LinearLayout 
+		   	    android:id="@+id/pad_line4"
+		       android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:layout_below="@id/pad_line3"
+			   android:orientation="horizontal">			   	
+		   	<Button 
+			   android:id="@+id/keypad10"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_weight="1"
+			   android:text="*"
+			   style="@style/DialPad"   
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad11"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			    android:layout_marginLeft="0dip"
+				android:layout_marginRight="0dip"
+			   android:layout_weight="1"
+			   android:text="0"
+			   style="@style/DialPad"
+		   	/>
+		   	<Button 
+			   android:id="@+id/keypad12"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"
+			   android:background="@drawable/selector_btn_dialpad"
+			   android:layout_weight="1"
+			   android:text="#"
+			   style="@style/DialPad"
+		   	/>
+		   	</LinearLayout>
+   	</RelativeLayout>
+   	
+     <RelativeLayout 
+            android:id="@+id/dialer_confirm"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_below="@id/layout_dialer_keypads"
+         	android:layout_above="@id/wifiphone_tab_btn"
+         	android:layout_centerHorizontal="true">
+         <Button
+         	android:id="@+id/dial_videocall"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_centerInParent="true"
+         	android:text="@string/dial"
+            android:textColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:textSize="20sp"
+         	android:background="@drawable/selector_btn_dialcall"
+             />
+         
+         
+         
+     </RelativeLayout>
+
+<!-- Bottom menubarbackground android:scaleType = "fitXY"-->
+	   <ImageView			
+	    android:layout_width = "fill_parent"
+	    android:layout_height = "wrap_content"		    
+	    android:src = "@drawable/bottombar_bg"		    
+	    android:layout_alignParentBottom="true"	   
+   		/>    
+   		
+<!-- Bottom menubar    -->   	   	
+     <LinearLayout
+        android:id="@+id/wifiphone_tab_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" 
+        android:background="@drawable/img_call_tab_bottom">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bottom_contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/selector_tab_contacts" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:text="@string/contacts"
+                style="@style/ContactsBottomTab" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bottom_keypad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_call_pad_highlight" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:text="@string/keypad"
+                style="@style/ContactsBottomTabHighLight" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bottom_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/selector_tab_history" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingTop="30dp"
+                android:text="@string/call_history"
+                style="@style/ContactsBottomTab" />
+        </RelativeLayout>
+    </LinearLayout>
+<!-- Bottom menubar END-->  
+
+    
+</RelativeLayout>

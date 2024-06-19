@@ -1,0 +1,74 @@
+===========================================================
+
+   NDK r14b
+
+===========================================================
+
+[enviroment setup]
+PATH=/home/frank/Android/Sdk/ndk/android-ndk-r14b/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/:/home/frank/Android/Sdk/ndk/android-ndk-r14b/toolchains/x86-4.9/prebuilt/linux-x86_64/bin/:$PATH
+export NDK=/home/frank/Android/Sdk/ndk/android-ndk-r14b
+
+[build: x86]
+./configure --target-os=linux --arch=x86 --cpu=i686 --enable-cross-compile --cross-prefix=i686-linux-android- --sysroot=/home/frank/Android/Sdk/ndk/android-ndk-r14b/platforms/android-12/arch-x86/ --cc=i686-linux-android-gcc --disable-programs --disable-shared --disable-filters --disable-vfp --disable-avdevice --disable-avfilter --disable-encoders --disable-decoders --enable-decoder=h264 --disable-protocols --disable-muxers --disable-demuxers --disable-parsers --disable-bsfs --disable-protocols --disable-network --disable-devices --disable-symver --extra-cflags='-std=c99 -O3 -Wall -fpic -pipe -DANDROID -DNDEBUG -march=atom -msse3 -ffast-math -mfpmath=sse' --extra-ldflags='-lm -lz -Wl,--no-undefined -Wl,-z,noexecstack' --prefix=./out/x86 
+
+[build: armeabi-v7a]
+./configure --target-os=linux --arch=arm --cpu=armv7-a --enable-cross-compile --cross-prefix=arm-linux-androideabi- --sysroot=/home/frank/Android/Sdk/ndk/android-ndk-r14b/platforms/android-12/arch-arm/ --cc=arm-linux-androideabi-gcc --disable-programs --disable-shared --disable-filters --disable-vfp --disable-avdevice --disable-avfilter --disable-encoders --disable-decoders --enable-decoder=h264 --disable-protocols --disable-muxers --disable-demuxers --disable-parsers --disable-bsfs --disable-protocols --disable-network --disable-devices --disable-symver --extra-cflags='-march=armv7-a -mtune=cortex-a9 -ffunction-sections -funwind-tables -mfloat-abi=softfp -mfpu=neon -DANDROID -DNDEBUG' --extra-ldflags='-lm -lz -Wl,--no-undefined -Wl,-z,noexecstack' --prefix=./out/armeabi-v7a
+
+
+
+===========================================================
+
+   NDK r23b
+
+===========================================================
+
+[ build: x86 ]
+make clean;make distclean
+export API=21
+export NDK=/home/frank/Android/Sdk/ndk/26.1.10909125
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+export CC=$TOOLCHAIN/bin/i686-linux-android$API-clang
+export CXX=$TOOLCHAIN/bin/i686-linux-android$API-clang++
+export CPU="x86"
+export ARCH="x86"
+./configure --prefix=./android/x86 \
+--enable-cross-compile \
+--cross-prefix=$TOOLCHAIN/bin/llvm- \
+--sysroot=$TOOLCHAIN/sysroot \
+--target-os=android \
+--arch=$ARCH \
+--cpu=$CPU \
+--cc=$CC \
+--cxx=$CXX \
+--disable-asm --disable-programs --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-shared --disable-doc --disable-filters --disable-vfp \
+--disable-avdevice --disable-avfilter --disable-encoders --disable-decoders \
+--enable-decoder=h264 --disable-protocols --disable-muxers --disable-demuxers \
+--disable-parsers --disable-bsfs --disable-protocols --disable-network --disable-devices --disable-symver --disable-vulkan
+
+
+[ build: armeabi-v7a ]
+make clean;make distclean
+export API=21
+export NDK=/home/frank/Android/Sdk/ndk/26.1.10909125
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+export CC=$TOOLCHAIN/bin/armv7a-linux-androideabi$API-clang
+export CXX=$TOOLCHAIN/bin/armv7a-linux-androideabi$API-clang++
+export CPU="armv7-a"
+export ARCH="arm"
+./configure --prefix=./android/armeabi-v7a \
+--enable-cross-compile \
+--cross-prefix=$TOOLCHAIN/bin/llvm- \
+--sysroot=$TOOLCHAIN/sysroot \
+--target-os=android \
+--arch=$ARCH \
+--cpu=$CPU \
+--cc=$CC \
+--cxx=$CXX \
+--extra-cflags='-march=armv7-a -mtune=cortex-a9 -ffunction-sections -funwind-tables -mfloat-abi=softfp -mfpu=neon -DANDROID -DNDEBUG' \
+--extra-ldflags='-lm -lz -Wl,--no-undefined -Wl,-z,noexecstack' \
+--disable-asm --disable-programs --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-shared --disable-doc --disable-filters --disable-vfp \
+--disable-avdevice --disable-avfilter --disable-encoders --disable-decoders \
+--enable-decoder=h264 --disable-protocols --disable-muxers --disable-demuxers \
+--disable-parsers --disable-bsfs --disable-protocols --disable-network --disable-devices --disable-symver --disable-vulkan
+
+make -j8;make install

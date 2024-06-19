@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mVideosessionbar"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#00ffffff">
+       
+       <ImageView  
+		        android:layout_width="fill_parent"
+		        android:layout_height="310dp"
+		        android:layout_centerInParent="true"
+		        android:paddingTop="188dp"
+		        android:visibility="gone"
+		        android:src="@drawable/local_view_frame_img"/>
+        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="150dp"
+	        android:orientation="vertical"
+	        android:layout_alignParentBottom="true"
+	        android:gravity="center">
+	        
+	    	<TextView  
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:id="@+id/mTimerTextView"
+		        style="@style/callingText"    
+		        android:text="00:00"
+		        android:textColor="#ffffff"
+		        android:textSize="8pt"
+		        android:textStyle="bold"
+		        android:layout_marginTop="30dp"
+		        android:layout_marginBottom="15dp"/>
+	        
+	        <ImageButton
+	            android:id="@+id/mEndCallBtn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"           
+	            android:background="@null"
+	            android:src="@drawable/session_btn_bye" />
+      </LinearLayout>
+
+</RelativeLayout>

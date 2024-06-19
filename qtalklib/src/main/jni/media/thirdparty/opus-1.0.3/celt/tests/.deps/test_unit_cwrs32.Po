@@ -1,0 +1,239 @@
+celt/tests/test_unit_cwrs32.o: celt/tests/test_unit_cwrs32.c config.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdio.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/features.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdc-predef.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/predefs.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/cdefs.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wordsize.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs-soft.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stddef.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/types.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/typesizes.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/libio.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/_G_config.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/wchar.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdarg.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio_lim.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sys_errlist.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/string.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/xlocale.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string2.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdlib.h \
+ celt/stack_alloc.h celt/entenc.c celt/os_support.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitflags.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitstatus.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/endian.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/endian.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/byteswap.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/byteswap-16.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/types.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/time.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/select.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/select.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sigset.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/time.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/sysmacros.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/pthreadtypes.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/alloca.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdlib-float.h \
+ celt/arch.h include/opus_types.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdint.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdint.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wchar.h \
+ celt/fixed_generic.h celt/entenc.h celt/entcode.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include-fixed/limits.h \
+ /opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include-fixed/syslimits.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/limits.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix1_lim.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/local_lim.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/limits.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix2_lim.h \
+ celt/ecintrin.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/math.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/huge_val.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/huge_valf.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/huge_vall.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/inf.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/nan.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/mathdef.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/mathcalls.h \
+ /opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/mathinline.h \
+ celt/mfrngcod.h celt/entdec.c celt/entdec.h celt/entcode.c celt/cwrs.c \
+ celt/cwrs.h celt/stack_alloc.h celt/mathops.h celt/mathops.c celt/rate.h \
+ celt/modes.h celt/celt.h include/opus_defines.h include/opus_types.h \
+ include/opus_custom.h include/opus_defines.h celt/mdct.h celt/kiss_fft.h
+
+config.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdio.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/features.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdc-predef.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/predefs.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/cdefs.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wordsize.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/gnu/stubs-soft.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stddef.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/types.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/typesizes.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/libio.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/_G_config.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/wchar.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdarg.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio_lim.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sys_errlist.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdio.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/string.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/xlocale.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/string2.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdlib.h:
+
+celt/stack_alloc.h:
+
+celt/entenc.c:
+
+celt/os_support.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitflags.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/waitstatus.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/endian.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/endian.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/byteswap.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/byteswap-16.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/types.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/time.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/select.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/select.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/sigset.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/time.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/sys/sysmacros.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/pthreadtypes.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/alloca.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/stdlib-float.h:
+
+celt/arch.h:
+
+include/opus_types.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include/stdint.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/stdint.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/wchar.h:
+
+celt/fixed_generic.h:
+
+celt/entenc.h:
+
+celt/entcode.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include-fixed/limits.h:
+
+/opt/arm-none-linux-gnueabi/bin/../lib/gcc/arm-none-linux-gnueabi/4.7.3/include-fixed/syslimits.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/limits.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix1_lim.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/local_lim.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/linux/limits.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/posix2_lim.h:
+
+celt/ecintrin.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/math.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/huge_val.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/huge_valf.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/huge_vall.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/inf.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/nan.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/mathdef.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/mathcalls.h:
+
+/opt/arm-none-linux-gnueabi/bin/../arm-none-linux-gnueabi/libc/usr/include/bits/mathinline.h:
+
+celt/mfrngcod.h:
+
+celt/entdec.c:
+
+celt/entdec.h:
+
+celt/entcode.c:
+
+celt/cwrs.c:
+
+celt/cwrs.h:
+
+celt/stack_alloc.h:
+
+celt/mathops.h:
+
+celt/mathops.c:
+
+celt/rate.h:
+
+celt/modes.h:
+
+celt/celt.h:
+
+include/opus_defines.h:
+
+include/opus_types.h:
+
+include/opus_custom.h:
+
+include/opus_defines.h:
+
+celt/mdct.h:
+
+celt/kiss_fft.h:

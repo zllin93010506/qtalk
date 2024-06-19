@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <TableLayout android:id="@+id/LayoutSetup" 
+        xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:layout_height="fill_parent" 
+        android:layout_width="fill_parent"
+        android:shrinkColumns="0" 
+        android:stretchColumns="1" 
+        >
+      <TableRow android:id="@+id/TableRowMinVport" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewMinVport" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="rtp video port start"></TextView>
+        <EditText android:id="@+id/EditTextMinVport" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+
+      <TableRow android:id="@+id/TableRowMaxVport" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewMaxVport" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="rtp video port end"></TextView>
+        <EditText android:id="@+id/EditTextMaxVport" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+      <TableRow android:id="@+id/TableRowMinAport" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewMinAport" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="rtp audio port start"></TextView>
+        <EditText android:id="@+id/EditTextMinAport" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+
+      <TableRow android:id="@+id/TableRowMaxAport" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewMaxAport" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="rtp audio port end"></TextView>
+        <EditText android:id="@+id/EditTextMaxAport" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+      
+      
+      <TableRow android:id="@+id/TableRowArtpTos" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewArtpTos" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="Audio rtp tos"></TextView>
+        <EditText android:id="@+id/EditTextArtpTos" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+
+      <TableRow android:id="@+id/TableRowVrtpTos" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewVrtpTos" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="Video rtp tos"></TextView>
+        <EditText android:id="@+id/EditTextVrtpTos" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+      <TableRow android:id="@+id/TableRowOutBandwidth" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewOutBandwidth" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="Outgoing Bandwidth"></TextView>
+        <EditText android:id="@+id/EditTextOutBandwidth" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>
+
+      <TableRow android:id="@+id/TableRowVideoMTU" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextViewVideoMTU" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_marginRight="5px" 
+            android:text="Video MTU"></TextView>
+        <EditText android:id="@+id/EditTextVideoMTU" 
+            android:singleLine="true" 
+            android:layout_width="200dip" 
+            android:layout_marginRight="5dip" 
+            android:maxLength="5"
+            android:inputType="number"></EditText>
+      </TableRow>          
+      </TableLayout>
+</ScrollView>

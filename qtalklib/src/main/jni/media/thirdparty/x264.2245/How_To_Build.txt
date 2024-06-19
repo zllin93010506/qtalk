@@ -1,0 +1,101 @@
+===========================================================
+
+   NDK r14b
+
+===========================================================
+[build: x86]
+export NDK=/home/frank/Android/Sdk/ndk/android-ndk-r14b
+./configure --prefix=./out/x86 \
+--enable-static \
+--enable-pic \
+--disable-cli \
+--disable-asm \
+--host=x86-linux \
+--cross-prefix=$NDK/toolchains/x86-4.9/prebuilt/linux-x86_64/bin/i686-linux-android- \
+--sysroot=$NDK/platforms/android-12/arch-x86
+
+make;make install
+
+[build: armeabi-v7a]
+export NDK=/home/frank/Android/Sdk/ndk/android-ndk-r14b
+./configure --prefix=./out/armeabi-v7a \
+--enable-static \
+--enable-pic \
+--disable-cli \
+--host=arm-linux \
+--cross-prefix=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi- \
+--sysroot=$NDK/platforms/android-12/arch-arm
+
+make;make install
+
+
+===========================================================
+
+   NDK 
+   26.1.10909125 / API=26
+   23.1.7779620 / API=21
+   android-ndk-r14b
+
+===========================================================
+[ build: x86 ]
+make clean;make distclean
+export NDK=/home/frank/Android/Sdk/ndk/26.1.10909125
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+export API=26
+export TARGET=x86_64-linux-android
+export CC=$TOOLCHAIN/bin/i686-linux-android$API-clang
+export CXX=$TOOLCHAIN/bin/i686-linux-android$API-clang++
+./configure --prefix=./android/x86 \
+--exec-prefix=./android/x86 \
+--disable-cli \
+--enable-static \
+--enable-pic \
+--disable-asm \
+--host=x86-linux \
+--sysroot="$TOOLCHAIN"/sysroot
+
+make;make install
+
+
+[ build: x86_64 ]
+make clean;make distclean
+export NDK=/home/frank/Android/Sdk/ndk/26.1.10909125
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+export API=26
+export TARGET=x86_64-linux-android
+export CC=$TOOLCHAIN/bin/x86_64-linux-android$API-clang
+export CXX=$TOOLCHAIN/bin/x86_64-linux-android$API-clang++
+OPTIMIZE_CFLAGS="-march=$CPU -msse4.2 -mpopcnt -m64 -mtune=intel"
+./configure --prefix=./android/x86-64 \
+--exec-prefix=./android/x86-64 \
+--disable-cli \
+--enable-static \
+--enable-pic \
+--host=x86_64-linux \
+--sysroot="$TOOLCHAIN"/sysroot
+
+make;make install
+
+
+[ build: armeabi-v7a ]
+make clean;make distclean
+export NDK=/home/frank/Android/Sdk/ndk/26.1.10909125
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+export API=26
+export TARGET=arm-linux
+export CC=$TOOLCHAIN/bin/armv7a-linux-androideabi$API-clang
+export CXX=$TOOLCHAIN/bin/armv7a-linux-androideabi$API-clang++
+export CFLAGS="-fPIE -fPIC"
+export LDFLAGS="-pie"
+export EXTRA_CFLAGS="-mfloat-abi=softfp -mfpu=neon"
+./configure --prefix=./android/armeabi-v7a \
+--exec-prefix=./android/armeabi-v7a \
+--disable-cli \
+--enable-static \
+--enable-pic \
+--disable-asm \
+--host=arm-linux \
+--sysroot="$TOOLCHAIN"/sysroot
+
+make;make install
+

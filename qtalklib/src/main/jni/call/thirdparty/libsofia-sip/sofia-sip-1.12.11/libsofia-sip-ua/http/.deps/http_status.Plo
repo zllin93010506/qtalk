@@ -1,0 +1,14 @@
+http_status.lo: http_status.c ../../config.h \
+ /tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h \
+ sofia-sip/http_status.h ../su/sofia-sip/su_config.h \
+ ../su/sofia-sip/su_configure.h
+
+../../config.h:
+
+/tmp/my-android-toolchain/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h:
+
+sofia-sip/http_status.h:
+
+../su/sofia-sip/su_config.h:
+
+../su/sofia-sip/su_configure.h:

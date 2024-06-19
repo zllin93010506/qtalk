@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/popup_back_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="270dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/avatar_img_panel"
+        android:orientation="vertical" >
+        
+         <Button 
+            android:id="@+id/camerabutton"
+            android:layout_marginTop="30dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+			android:background="@drawable/selector_avatar_button"
+            android:text="拍攝照片"
+            android:textSize="8pt"
+            android:textColor="@drawable/selector_avatar_text"/>
+
+        <Button 
+            android:id="@+id/gallerybutton"
+            android:layout_marginTop="7dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+			android:background="@drawable/selector_avatar_button"
+            android:text="從圖庫中選取照片"
+            android:textSize="8pt"
+            android:textColor="@drawable/selector_avatar_text"/>
+
+        <Button
+            android:id="@+id/defaultbutton"
+            android:layout_marginTop="7dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+			android:background="@drawable/selector_avatar_button"
+            android:text="使用預設圖片"
+            android:textSize="8pt"
+            android:textColor="@drawable/selector_avatar_text"/>
+
+        <Button
+            android:id="@+id/cancelbutton"
+            android:layout_marginTop="7dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+			android:background="@drawable/selector_avatar_button"
+            android:text="取消"
+            android:textSize="8pt"
+            android:textColor="@drawable/selector_avatar_text"/>
+    </LinearLayout>
+
+</RelativeLayout>
