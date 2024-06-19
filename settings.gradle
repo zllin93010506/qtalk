@@ -1,1 +1,1 @@
-include ':qtalklib'
+include ':app', ':qtalklib'
