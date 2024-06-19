@@ -64,21 +64,4 @@ public class AbstractCallTimerActivity extends AbstractBaseCallActivity
         finish();
       }
     };
-    
-//    @Override
-//	 public boolean onKeyDown(int keyCode, KeyEvent event) {
-//	  switch (keyCode) {
-//	  case KeyEvent.KEYCODE_VOLUME_UP:
-//		  mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
-//		  AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
-//	      return true;
-//	  case KeyEvent.KEYCODE_VOLUME_DOWN:
-//		  mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
-//	      AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
-//	      return true;
-//	  default:
-//	   break;
-//	  }
-//	  return super.onKeyDown(keyCode, event);
-//	 }
 }

@@ -247,7 +247,8 @@ public class InPttSessionActivity extends AbstractInAudioSessionActivity {
     @Override
     protected void onResume()
     {
-    	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"onResume- mCallHold:"+mCallHold+", mSpeakerOn:"+mSpeakerOn);
+    	if(ProvisionSetupActivity.debugMode)
+            Log.d(DEBUGTAG,"onResume- mCallHold:"+mCallHold+", mSpeakerOn:"+mSpeakerOn);
         super.onResume();
     }
     
@@ -318,7 +319,6 @@ public class InPttSessionActivity extends AbstractInAudioSessionActivity {
                 try
                 {
                 	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"==>onReinviteFailed");
-                    cleanAlertDialog();
                     if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"<==onReinviteFailed");
                 }
                 catch(Exception err)
