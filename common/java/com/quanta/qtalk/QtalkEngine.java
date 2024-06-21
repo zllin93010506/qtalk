@@ -54,7 +54,6 @@ public class QtalkEngine implements ICallEngineListener {
     private static final Handler mHandler = new Handler(Looper.getMainLooper());
     private static boolean mInSession = false;
 
-    private QtalkLogManager mQtalkLogManager = null;
     public static final String LOG_FILE_NAME = "viro.log";
     public static final String UPLOAD_FOLDER_NAME = "viro_log";
     private boolean mPreSipLogin = false;
@@ -116,8 +115,6 @@ public class QtalkEngine implements ICallEngineListener {
         mContext = null;
         mCallEngine = null;
         mLoginSuccess = false;
-        if (ENABLE_LOG)
-            mQtalkLogManager.stopUploadThread();
         if (ProvisionSetupActivity.debugMode)
             Log.d(DEBUGTAG, "<==logout");
 
@@ -142,8 +139,6 @@ public class QtalkEngine implements ICallEngineListener {
         mContext = null;
         mCallEngine = null;
         mLoginSuccess = false;
-        if (ENABLE_LOG)
-            mQtalkLogManager.stopUploadThread();
         if (ProvisionSetupActivity.debugMode)
             Log.d(DEBUGTAG, "<==logout");
 
@@ -178,18 +173,6 @@ public class QtalkEngine implements ICallEngineListener {
             Log.d(DEBUGTAG, "QTService now is logon.");
         } else {
             Log.d(DEBUGTAG, "QTService now isnot logon.");
-        }
-
-        if (ENABLE_LOG) {
-            if (mQtalkLogManager == null && context != null) {
-                String deviceID = DeviceIDUtility.getSerialNumber(context);
-                mQtalkLogManager = new QtalkLogManager(deviceID,
-                    Hack.getStoragePath() + LOG_FILE_NAME,
-                    Hack.getStoragePath() + File.separatorChar + UPLOAD_FOLDER_NAME);
-                Log.setWriter(mQtalkLogManager);// Setup the log writer
-            }
-            if (mQtalkLogManager != null)
-                mQtalkLogManager.startUploadThread();
         }
 
         mConManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -516,27 +499,6 @@ public class QtalkEngine implements ICallEngineListener {
                 // CALLS X1
                 result.autoAnswer = preference.getBoolean(QtalkPreference.SETTING_AUTO_ANSWER, false);
                 // NETWORK
-                /*
-                 * result.sshServer = preference.getString( QtalkPreference.SETTING_SSH_SERVER,
-                 * "");
-                 * result.sshUserName = preference.getString(
-                 * QtalkPreference.SETTING_SSH_USERNAME, "");
-                 * result.sshPassWord = preference.getString(
-                 * QtalkPreference.SETTING_SSH_PASSWORD, "");
-                 * result.ftpServer = preference.getString( QtalkPreference.SETTING_FTP_SERVER,
-                 * "");
-                 * result.ftpUserName = preference.getString(
-                 * QtalkPreference.SETTING_FTP_USER_NAME, "");
-                 * result.ftpPassWord = preference.getString(
-                 * QtalkPreference.SETTING_FTP_PASSWORD, "");
-                 * 
-                 * if(!result.sshServer.trim().equalsIgnoreCase("") &&
-                 * result.sshServer.length()>0)
-                 * QtalkLogManager.enableSftp(result.sshServer, result.sshUserName,
-                 * result.sshPassWord);
-                 * else
-                 */
-                QtalkLogManager.disableSftp();
                 // OTHERS
                 result.useDefaultDialer = preference.getBoolean(QtalkPreference.SETTING_USE_DEFAULTDIALER, false);
                 result.provisionID = preference.getString(QtalkPreference.SETTING_PROVISION_USER_ID, "");
@@ -837,9 +799,6 @@ public class QtalkEngine implements ICallEngineListener {
              * }
              */
 
-        }
-        if (ENABLE_LOG) {
-            mQtalkLogManager.uploadLog();
         }
         if (ProvisionSetupActivity.debugMode)
             Log.d(DEBUGTAG, "<==hangupCall:" + mCallTable.size());
@@ -1254,8 +1213,6 @@ public class QtalkEngine implements ICallEngineListener {
                         }
                         // mListener.onRemoteHangup(call.getCallID(),msg);
                     }
-                    if (ENABLE_LOG)
-                        mQtalkLogManager.uploadLog();
                 }
                 if (ProvisionSetupActivity.debugMode)
                     Log.d(DEBUGTAG, "<==onCallHangup:" + mCallTable.size());
@@ -1352,8 +1309,6 @@ public class QtalkEngine implements ICallEngineListener {
                 // mCallTable.remove(call.getCallID());
                 if (mListener != null && call != null)
                     mListener.onSessionEnd(call.getCallID());
-                if (ENABLE_LOG && mQtalkLogManager != null)
-                    mQtalkLogManager.uploadLog();
                 if (ProvisionSetupActivity.debugMode)
                     Log.d(DEBUGTAG, "<==onSessionEnd:" + mCallTable.size());
             }
@@ -1378,8 +1333,6 @@ public class QtalkEngine implements ICallEngineListener {
                 // mCallTable.remove(call.getCallID());
                 if (mListener != null && call != null)
                     mListener.onMCUSessionEnd(call.getCallID());
-                if (ENABLE_LOG)
-                    mQtalkLogManager.uploadLog();
                 mCallTable.remove(call.getCallID());
                 if (ProvisionSetupActivity.debugMode)
                     Log.d(DEBUGTAG, "<==onMCUSessionEnd:" + mCallTable.size());

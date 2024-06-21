@@ -51,11 +51,6 @@ android {
         debug {
             testCoverageEnabled true
         }
-//        android {
-//            jacoco {
-//                version = '0.7.9'
-//            }
-//        }
     }
 
     compileOptions {
