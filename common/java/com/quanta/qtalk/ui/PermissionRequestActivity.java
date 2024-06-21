@@ -179,20 +179,15 @@ public class PermissionRequestActivity extends Activity {
     }
 
     public void ClickHandler(View view) {
-        switch (view.getId()) {
-            case R.id.requestPermissionButton:
-                Log.d(DEBUGTAG, "requestPermissions:"+mPermissionsNeeded.size());
-                ActivityCompat.requestPermissions(
-                        this,
-                        mPermissionsNeeded.toArray(new String[0]),
-                        REQUEST_CODE_PERMISSIONS
-                );
-                Log.d(DEBUGTAG,"start system requestPermissions activity and finish.");
-                finish();
-                break;
-            default:
-                // Handle unknown click events
-                break;
+        if(view.getId()==R.id.requestPermissionButton) {
+            Log.d(DEBUGTAG, "requestPermissions:"+mPermissionsNeeded.size());
+            ActivityCompat.requestPermissions(
+                    this,
+                    mPermissionsNeeded.toArray(new String[0]),
+                    REQUEST_CODE_PERMISSIONS
+            );
+            Log.d(DEBUGTAG,"start system requestPermissions activity and finish.");
+            finish();
         }
     }
 }

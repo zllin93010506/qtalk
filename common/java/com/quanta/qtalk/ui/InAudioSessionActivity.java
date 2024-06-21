@@ -348,28 +348,11 @@ public class InAudioSessionActivity extends AbstractInAudioSessionActivity {
                 if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"selectN:"+selectN);
                 if(ViroActivityManager.isCurrentPageTopActivity(InAudioSessionActivity.this,InAudioSessionActivity.class.getCanonicalName()))
                 {
-                    switch(selectN){
-       /*             	case R.id.SR2_switch_Btn:
-                    		DisableAllCounter();
-                    		try {
-								m_service_broadcast.Start();
-							} catch (RemoteException e) {
-								// TODO Auto-generated catch block
-								Log.e(DEBUGTAG,"",e);
-							}
-                    		break;
-                        case R.id.SwitchVideoBtn://VIDEO CALL                                
-                            //TODO
-                            //accept(true);//boolean enableVideo
-                             //finish();
-                            reinvite(true);
-                            break;
-                    */
-                        case R.id.endBtn:
-                            hangup(false);
-                            AppStatus.setStatus(AppStatus.IDEL);
-                            finish();                            
-                            break;
+                    if(selectN==R.id.endBtn)
+                    {
+                        hangup(false);
+                        AppStatus.setStatus(AppStatus.IDEL);
+                        finish();
                     }
                 }
             }

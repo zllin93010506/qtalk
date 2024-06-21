@@ -293,27 +293,24 @@ public class ContactsActivity extends AbstractContactsActivity{
   	            public void onClick(View v) {
   	                synchronized(ContactsActivity.this)
   	                {
-  	                	switch(v.getId()){
-	  	                 case R.id.call_history:
-	  	                	 	Log.d(DEBUGTAG,"send open call_history");
-	  	                    	Intent history = new Intent();
-	  	                    	history.setClass(ContactsActivity.this, HistoryActivity.class);
-	  	                    	history.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-	  	        	  			startActivity(history);
-	  	        	  			finish();
-	  	        	  			overridePendingTransition(0, 0);
-	  	          	  			break;
-		  	             case R.id.notification_none:
-		                    	Intent notification_none = new Intent();
-		                    	notification_none.setClass(ContactsActivity.this, NotificationActivity.class);
-		                    	startActivity(notification_none);
-		      	  				break;
-			  	         case R.id.notification_unread:
-		                    	Intent notification_unread = new Intent();
-		                    	notification_unread.setClass(ContactsActivity.this, NotificationActivity.class);
-		                    	startActivity(notification_unread);
-		      	  				break;
-  	                	}
+						int id = v.getId();
+						if(id==R.id.call_history){
+							Log.d(DEBUGTAG,"send open call_history");
+							Intent history = new Intent();
+							history.setClass(ContactsActivity.this, HistoryActivity.class);
+							history.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+							startActivity(history);
+							finish();
+							overridePendingTransition(0, 0);
+						}else if(id==R.id.notification_none){
+							Intent notification_none = new Intent();
+	                    	notification_none.setClass(ContactsActivity.this, NotificationActivity.class);
+	                    	startActivity(notification_none);
+						} else if(id==R.id.notification_unread){
+							Intent notification_unread = new Intent();
+	                    	notification_unread.setClass(ContactsActivity.this, NotificationActivity.class);
+	                    	startActivity(notification_unread);
+						}
   	                }
   	            }//End of onclick
   	        };

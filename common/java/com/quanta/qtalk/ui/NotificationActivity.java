@@ -76,11 +76,10 @@ public class NotificationActivity extends AbstractUiListActivity{
 	            public void onClick(View v) {
 	                synchronized(NotificationActivity.this)
 	                {
-	                	switch(v.getId()){
-  	                   case R.id.return_btn:
-  	                    	finish();
-  	          	  			break;
-	                	}
+						if(v.getId()==R.id.return_btn) 
+						{
+							finish();
+						}
 	                }
 	            }//End of onclick
 	        };

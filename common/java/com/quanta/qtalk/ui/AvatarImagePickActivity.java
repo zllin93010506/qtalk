@@ -55,32 +55,27 @@ public class AvatarImagePickActivity extends AbstractVolumeActivity{
             public void onClick(View v) {
                 synchronized(AvatarImagePickActivity.this)
                 {
-                	switch(v.getId()){
-                    case R.id.camerabutton:
-        			    Intent intent_camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);  
+					int id = v.getId();
+					if(id==R.id.camerabutton) {
+						Intent intent_camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);  
         			    intent_camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg")));  
-                        startActivityForResult(intent_camera, TAKE_PICTURE); 
-        				break;   
-                    case R.id.gallerybutton:
-                    	Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                    	photoPickerIntent.setType("image/*");
-                    	startActivityForResult(photoPickerIntent, PICK_PICTURE); 
-        				break; 
-                    case R.id.defaultbutton:
-                    	File file = new File (path);
-                		if (file.exists())
-                		{	
-                			file.delete();
-                			Intent AvatarIntent = new Intent();
-                			AvatarIntent.setClass(AvatarImagePickActivity.this, AvatarActivity.class);
-                			startActivity(AvatarIntent);
-                		}
-                    	finish();
-                    	break;
-                    case R.id.cancelbutton:
-                    	finish();
-                    	break;
-                	}
+                        startActivityForResult(intent_camera, TAKE_PICTURE);
+					} else if(id==R.id.gallerybutton) {
+						Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+						photoPickerIntent.setType("image/*");
+						startActivityForResult(photoPickerIntent, PICK_PICTURE);
+					} else if(id==R.id.defaultbutton) {
+						File file = new File (path);
+						if (file.exists()) {
+							file.delete();
+							Intent AvatarIntent = new Intent();
+							AvatarIntent.setClass(AvatarImagePickActivity.this, AvatarActivity.class);
+							startActivity(AvatarIntent);
+						}
+						finish();
+					} else if(id==R.id.cancelbutton) {
+						finish();
+					}
                 }
             }//End of onclick
         };

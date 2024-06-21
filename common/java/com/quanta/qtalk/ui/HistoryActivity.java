@@ -921,17 +921,13 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
                 public void onClick(View v) {
                     synchronized(HistoryActivity.this)
                     {
-                    	switch(v.getId()){
-							case R.id.call_contacts:
-									Intent contacts = new Intent();
-									contacts.setClass(HistoryActivity.this, ContactsActivity.class);
-									contacts.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-									startActivity(contacts);
-									finish();
-									overridePendingTransition(0, 0);
-									break;
-							default:
-									break;
+						if(v.getId() == R.id.call_contacts){
+							Intent contacts = new Intent();
+							contacts.setClass(HistoryActivity.this, ContactsActivity.class);
+							contacts.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+							startActivity(contacts);
+							finish();
+							overridePendingTransition(0, 0);
 						}
                     }
                 }//End of onclick

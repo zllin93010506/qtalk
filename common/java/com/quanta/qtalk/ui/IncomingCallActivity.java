@@ -355,24 +355,21 @@ public class IncomingCallActivity extends AbstractIncomingCallActivity
             @Override
             public void onClick(View v){
                 int selectN=v.getId();
-                switch(selectN){
-                    case  R.id.videoBtn:
-                        accept(true,false);
-                        Log.d(DEBUGTAG, "finish: 4");
-                        finish();
-                    break;
-                    case R.id.voiceBtn:
-                        accept(true,true);
-                        Log.d(DEBUGTAG, "finish: 5");
-                        finish();
-                    break;
-                    case R.id.rejectBtn:
-                    	hangup();
-                    	Log.d(DEBUGTAG, "finish: 6");
-                        finish();
-                    break;
+                if(selectN==R.id.videoBtn){
+                    accept(true,false);
+                    Log.d(DEBUGTAG, "finish: 4");
+                    finish();
                 }
-                    
+                else if(selectN==R.id.voiceBtn){
+                    accept(true,true);
+                    Log.d(DEBUGTAG, "finish: 5");
+                    finish();
+                }
+                else if(selectN==R.id.rejectBtn){
+                    hangup();
+                    Log.d(DEBUGTAG, "finish: 6");
+                    finish();
+                }   
             }
         };
         
