@@ -4,7 +4,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerInParent="true" >
-    
+
         <RelativeLayout
             android:id="@+id/broadcast_popout_title"
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:layout_height="450dp"
                 android:layout_centerHorizontal="true"
                 android:orientation="vertical"
-                android:paddingBottom="10dp" 
+                android:paddingBottom="10dp"
                 android:paddingTop="30dp">
 
                 <RadioGroup
@@ -72,6 +72,10 @@
                 android:background="@drawable/selector_btn_new_broadcast"
                 android:gravity="center_vertical|left"
                 android:paddingLeft="42dp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="20sp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeStepGranularity="1sp"
                 android:text="@string/push_to_talk"
                 style="@style/ns_push_to_talk_btn" />
 
@@ -115,5 +119,5 @@
                 </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>
-    
+
 </RelativeLayout>

@@ -13,30 +13,7 @@ import android.content.SharedPreferences;
 public class QtalkApplication extends Application {
     //    private static final String TAG = "QtalkApplication";
     private static final String DEBUGTAG = "QTFa_QtalkApplication";
-    private final static Object mSyncObject = new Object();
-    private final static java.util.Map<String, MediaEngine> mMediaEngineTable = new java.util.TreeMap<>();
 
-    public MediaEngine getMediaEngine(String callID) {
-        MediaEngine result = null;
-        synchronized (mSyncObject) {
-            if (callID != null) {
-                result = mMediaEngineTable.get(callID);
-                if (result == null) {
-                    if (ProvisionSetupActivity.debugMode)
-                        Log.d(DEBUGTAG, "new MediaEngine:" + callID + "@" + this.hashCode() + " size:" + mMediaEngineTable.size());
-                    result = new MediaEngine();
-                    mMediaEngineTable.put(callID, result);
-                }
-            }
-        }
-        return result;
-    }
-
-    public void destoryMediaEngine(String callID) {
-        synchronized (mSyncObject) {
-            mMediaEngineTable.remove(callID);
-        }
-    }
 
     private static Context appContext;
 

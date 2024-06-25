@@ -58,9 +58,8 @@ public class LoginRetryActivity extends Activity
         
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        
-        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-    	QtalkDB qtalkdb = new QtalkDB();
+
+    	QtalkDB qtalkdb = QtalkDB.getInstance(this);
     	
     	Cursor cs = qtalkdb.returnAllATEntry();
     	int size = cs.getCount();

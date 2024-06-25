@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
+import com.quanta.qtalk.media.MediaEngine;
 import com.quanta.qtalk.ui.contact.ContactManager;
 import com.quanta.qtalk.ui.contact.ContactQT;
 import com.quanta.qtalk.util.Hack;
@@ -121,5 +122,31 @@ public abstract class AbstractBaseCallActivity extends AbstractUiActivity {
             return super.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private final static Object mSyncObject = new Object();
+    private final static java.util.Map<String, MediaEngine> mMediaEngineTable = new java.util.TreeMap<>();
+
+
+
+    public void destoryMediaEngine(String callID) {
+        synchronized (mSyncObject) {
+            mMediaEngineTable.remove(callID);
+        }
+    }
+    public MediaEngine getMediaEngine(String callID) {
+        MediaEngine result = null;
+        synchronized (mSyncObject) {
+            if (callID != null) {
+                result = mMediaEngineTable.get(callID);
+                if (result == null) {
+                    if (ProvisionSetupActivity.debugMode)
+                        Log.d(DEBUGTAG, "new MediaEngine:" + callID + "@" + this.hashCode() + " size:" + mMediaEngineTable.size());
+                    result = new MediaEngine();
+                    mMediaEngineTable.put(callID, result);
+                }
+            }
+        }
+        return result;
     }
 }

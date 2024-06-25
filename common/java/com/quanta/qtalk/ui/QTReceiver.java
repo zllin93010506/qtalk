@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -145,8 +146,6 @@ public class QTReceiver extends BroadcastReceiver
         }
     };
     
-    QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-    
 	@Override
     public void onReceive(final Context context,final Intent intent)
     {
@@ -163,7 +162,7 @@ public class QTReceiver extends BroadcastReceiver
 			}
         	currentTime.setToNow();
         	currentTime.toMillis(false);
-        	
+			QThProvisionUtility qtnMessenger = new QThProvisionUtility(context, mHandler, null);
         	if( currentTime.toMillis(false) - lastCheckProvisionTime.toMillis(false) >= CheckProvisionUpdatePeriod*1000)
         	{
         		Log.d(DEBUGTAG, "mEngine.isInSession():"+mEngine.isInSession()+
@@ -175,7 +174,7 @@ public class QTReceiver extends BroadcastReceiver
         		else if( qtalk_settings.config_file_forced_provision_periodic_timer != null) {
         			//perform check here...
         			new Thread( new Runnable(){
-        				QtalkDB qtalkdb = new QtalkDB();
+        				QtalkDB qtalkdb = QtalkDB.getInstance(context);
         	            @Override
         	            public void run()
         	            {
@@ -807,10 +806,14 @@ public class QTReceiver extends BroadcastReceiver
 
         if (!(QtalkEngine.isServiceExisted(context, QTSERVICE_NAME))) {
             Log.d(DEBUGTAG, "QTService is not exist, startQTService ");
-            context.startForegroundService(new Intent(context, QTService.class));
-        } else {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				context.startForegroundService(new Intent(context, QTService.class));
+			}
+		} else {
             Log.d(DEBUGTAG, "QTService is exist but start again");
-            context.startForegroundService(new Intent(context, QTService.class));
-        }
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				context.startForegroundService(new Intent(context, QTService.class));
+			}
+		}
     }
 }

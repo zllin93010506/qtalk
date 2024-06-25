@@ -51,7 +51,7 @@ public class QThProvisionUtility {
 	private String URL;
     private static final String DEBUGTAG = "QSE_Provision";
 	private String password = null;
-	
+
 	private final int HTTP_TIMEOUT = 3000; //10000; // set http-timeout to 3 seconds, to avoid trigger ANR (> 5 seconds)
 	private final int PROVISION_UPDATE_SUCCESS = 1;
 	private final int PHONEBOOK_UPDATE_SUCCESS = 2;
@@ -67,13 +67,13 @@ public class QThProvisionUtility {
 	private final int BROADCAST_IN_PROGRESS = 12;
 	private final int BUSY = 0;
 	private final String TAG_SERVICE = "service";
-	
+
 	private final String TAG_PROVISION = "provision";
 	private final String TAG_PHONEBOOK = "phonebook";
 	private final String TAG_BROADCAST = "broadcastmcu";
 	private final String PROVISION_FILENAME = "provision.xml";
 	private final String PHONEBOOK_FILENAME = "phonebook.xml";
-	
+
 	final String TAG_SERVICE_ACTIVATE = "activate";
 	final String TAG_SERVICE_DEACTIVATE = "deactivate";
 	final String TAG_ROLE = "role";
@@ -91,16 +91,16 @@ public class QThProvisionUtility {
 	final String TAG_WEBVIEW = "webview";
 	final String provision_file = Hack.getStoragePath()+PROVISION_FILENAME;
 	final String phonebook_file = Hack.getStoragePath()+PHONEBOOK_FILENAME;
-	int count = 0;
-	
 	public static ProvisionInfo provision_info = null;
-	QtalkSettings qtalk_settings;
 	Object lock_obj = new Object();
     private Handler mUI_Handler;
 	private _FakeX509TrustManager tm = new _FakeX509TrustManager();
-	public QThProvisionUtility (Handler m_Handler,String URL){
+
+	private Context mContext;
+	public QThProvisionUtility (Context mContext, Handler m_Handler,String URL){
 		this.setURL(URL);
 		mUI_Handler=m_Handler;
+		mContext=mContext;
 	}
 	private File FilePhonebook = new File (phonebook_file);
 	private File FileProvision = new File (provision_file);
@@ -110,8 +110,8 @@ public class QThProvisionUtility {
 	{
 		if((result_bundle!=null)&&("phonebook".indexOf(result_bundle.getString("service", ""))<0)) //do not print phonebook check response messsage
 			Log.d(DEBUGTAG,"response(), " + result_bundle);
-		
-		/***************************************login check******************************************/		
+
+		/***************************************login check******************************************/
 		if(result.startsWith("service=activate&msg=idfail"))
 		{
 			Log.d(DEBUGTAG,"=> login_failed, invaild uid");
@@ -135,7 +135,7 @@ public class QThProvisionUtility {
 			{
 				if (result_bundle.getString(TAG_TIMESTAMP).equals(result_bundle.getString(TAG_TIMESTAMP_OLD)))
 				{
-					if (!FileProvision.exists()) {	
+					if (!FileProvision.exists()) {
 						ProvisionDownload(result_bundle,result);
 					}
 					provision_info = ProvisionUtility.parseProvisionConfig(provision_file);
@@ -156,7 +156,7 @@ public class QThProvisionUtility {
 			}
 			else
 			{
-				if (!FileProvision.exists()) {	
+				if (!FileProvision.exists()) {
 					ProvisionDownload(result_bundle,result);
 				}
 				provision_info = ProvisionUtility.parseProvisionConfig(provision_file);
@@ -174,7 +174,7 @@ public class QThProvisionUtility {
 			{
 				if (result_bundle.getString(TAG_TIMESTAMP).equals(TAG_TIMESTAMP_OLD))
 				{
-					if (!FilePhonebook.exists()) {	
+					if (!FilePhonebook.exists()) {
 						PhonebookDownload(result_bundle,result);
 					}
 					Message provision_response_msg = mUI_Handler.obtainMessage(1, result);
@@ -194,7 +194,7 @@ public class QThProvisionUtility {
 			}
 			else
 			{
-				if (!FilePhonebook.exists()) {	
+				if (!FilePhonebook.exists()) {
 					PhonebookDownload(result_bundle,result);
 				}
 				Message provision_response_msg = mUI_Handler.obtainMessage(1, result);
@@ -211,7 +211,7 @@ public class QThProvisionUtility {
 					if(result_bundle.getString(TAG_SESSION) != null)
 					{
 						Log.d(DEBUGTAG,"=> activate login_success");
-						QtalkDB qtalkdb = new QtalkDB();
+						QtalkDB qtalkdb = QtalkDB.getInstance(mContext);
 						qtalkdb.insertATEntry(result_bundle.getString(TAG_SESSION),
 								result_bundle.getString(TAG_KEY),
 								result_bundle.getString("server"),
@@ -230,7 +230,7 @@ public class QThProvisionUtility {
 						provision_response_msg.what = this.ACTIVATE_LOGIN_SUCCESS;
 						provision_response_msg.setData(result_bundle);
 			            mUI_Handler.sendMessage(provision_response_msg);
-			            
+
 					}
 					else    //service=activate&msg=success&key={key}
 					{
@@ -249,7 +249,7 @@ public class QThProvisionUtility {
 					else
 						throw new IOException("=> there's no authtication key.");
 				}
-				
+
 			}
 		/***************************************deactivate check******************************************/
 		else if(result_bundle.getString(TAG_SERVICE).contentEquals(TAG_SERVICE_ACTIVATE) && result_bundle.getString(TAG_MSG).equals(TAG_SERVICE_DEACTIVATE))  //service=activate&msg=deactivate
@@ -266,7 +266,7 @@ public class QThProvisionUtility {
 			if(result_bundle.getString(TAG_MSG)!=null)
 			{
 				Log.d(DEBUGTAG,"=> avatar success!!");
-		        
+
 				Message provision_response_msg = mUI_Handler.obtainMessage(1, result);
 				provision_response_msg.what = this.AVATAR_SUCCESS;
 				provision_response_msg.setData(result_bundle);
@@ -275,7 +275,7 @@ public class QThProvisionUtility {
 			else
 			{
 				Log.d(DEBUGTAG,"=> avatar FAILED!!");
-		        
+
 				Message provision_response_msg = mUI_Handler.obtainMessage(1, result);
 				provision_response_msg.what = this.AVATAR_FAIL;
 				provision_response_msg.setData(result_bundle);
@@ -327,12 +327,12 @@ public class QThProvisionUtility {
 	//response_handler end
 
 	/**************************************HttpsURLConnection Start********************************************/
-	
+
 	/*************keep alive***************/
 	public void httpsConnect(String url) throws IOException
 	{
 		synchronized(lock_obj) {
-	    	try{ 
+	    	try{
 	    		Log.d(DEBUGTAG, "httpsConnect(keep alive), url:"+url);
 
 				HttpMethod http = new HttpMethod();
@@ -342,7 +342,7 @@ public class QThProvisionUtility {
 
 				Bundle result_bundle = cmd_parser( result);
 				response_handler( result, result_bundle);
-	
+
 	    	}
 	    	catch(Exception ex) {
 	    		Log.e(DEBUGTAG,"",ex);
@@ -351,14 +351,14 @@ public class QThProvisionUtility {
 	    	finally {
 	    	}
 		}
-    	
+
     }
-	
+
 	/*************broadcast request***************/
 	public void httpsConnect(String url,String x) throws IOException
 	{
 		synchronized(lock_obj) {
-	    	try{ 
+	    	try{
 	    		Log.d(DEBUGTAG,"httpsConnect(broadcast), url:"+url);
 
 				HttpMethod http = new HttpMethod();
@@ -368,7 +368,7 @@ public class QThProvisionUtility {
 
 				Bundle result_bundle = cmd_parser( result);
 				response_handler( result, result_bundle);
-	
+
 	    	}catch(Exception ex){
 	    		Log.e(DEBUGTAG,"",ex);
 	    		throw new IOException("<error> broadcast failed, ex:"+ex);
@@ -381,7 +381,7 @@ public class QThProvisionUtility {
 	{
 		synchronized(lock_obj) {
 			HttpsURLConnection con = null;
-	    	try{ 
+	    	try{
 	    		Log.d(DEBUGTAG,"httpsConnect(login check), url:" + url);
 
 				HttpMethod http = new HttpMethod();
@@ -393,7 +393,7 @@ public class QThProvisionUtility {
 				result_bundle.putString("session", session);
 				result_bundle.putString("version", version);
 				response_handler( result, result_bundle);
-	
+
 	    	}catch(Exception ex){
 	    		Log.e(DEBUGTAG,"",ex);
 	    		throw new IOException("<error> login check failed. ex:"+ex);
@@ -409,7 +409,7 @@ public class QThProvisionUtility {
 	public void httpsConnect(String url, String server, String uid, String type, String version) throws IOException
 	{
 		synchronized(lock_obj) {
-	    	try{ 
+	    	try{
 	    		Log.d(DEBUGTAG,"httpsConnect(activate), url:"+url);
 
 				HttpMethod http = new HttpMethod();
@@ -423,20 +423,20 @@ public class QThProvisionUtility {
 				result_bundle.putString("type", type);
 				result_bundle.putString("version", version);
 				response_handler( result, result_bundle);
-	
+
 	    	}catch(Exception ex){
-	    		Log.e(DEBUGTAG,"",ex);
+	    		Log.e(DEBUGTAG,HttpMethod.oneLineStackTrace(ex));
 	    		throw new IOException("<error> activate failed, ex:"+ex);
 	    	}finally {
 	    	}
 		}
-    }	
+    }
 	/*************login provision & phonebook check***************/
 	public void httpsConnect(String url, String session, String timestamp_old, String uid, String type, String Pserver, String key) throws IOException
 	{
 		synchronized(lock_obj) {
 
-	    	try{ 
+	    	try{
 	    		//Log.d(DEBUGTAG,"httpsConnect(phonebook check), url:"+url);
 				HttpMethod http = new HttpMethod();
 				Response detailRes = http.getRequest(url);
@@ -462,36 +462,36 @@ public class QThProvisionUtility {
 	    	}
 		}
     }
-	
+
 	public final static String MOBILE_ACTION_UNDEF = "";
 	public final static String MOBILE_ACTION_WAKE = "wake";
 	public final static String MOBILE_ACTION_SLEEP = "sleep";
 	public final static String MOBILE_ACTION_CLEAR = "clear";
-	
-	
-	private void setMobileStatus(Context context, boolean status)	{
+
+
+	private void setMobileStatus(boolean status)	{
 		Log.i(DEBUGTAG, "set VCLOGIN="+status);
-		PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("MOBILE_STATUS", status).commit();
+		PreferenceManager.getDefaultSharedPreferences(mContext).edit().putBoolean("MOBILE_STATUS", status).commit();
 	}
 
-	private boolean getMobileStatus(Context context) {
-		boolean ret = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("MOBILE_STATUS", false);
+	private boolean getMobileStatus(Context mContext) {
+		boolean ret = PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("MOBILE_STATUS", false);
 		Log.i(DEBUGTAG, "VCLOGIN="+ret);
 		return ret;
 	}
-	
-	private void setMobileAction(Context context, String action)	{
+
+	private void setMobileAction(String action)	{
 		Log.i(DEBUGTAG, "set MOBILE_ACTION="+action);
-		PreferenceManager.getDefaultSharedPreferences(context).edit().putString("MOBILE_ACTION", action).commit();
+		PreferenceManager.getDefaultSharedPreferences(mContext).edit().putString("MOBILE_ACTION", action).commit();
 	}
 
-	private String getMobileAction(Context context) {
-		String ret = PreferenceManager.getDefaultSharedPreferences(context).getString("MOBILE_ACTION", MOBILE_ACTION_UNDEF);
+	private String getMobileAction(Context mContext) {
+		String ret = PreferenceManager.getDefaultSharedPreferences(mContext).getString("MOBILE_ACTION", MOBILE_ACTION_UNDEF);
 		Log.i(DEBUGTAG, "MOBILE_ACTION="+ret);
 		return ret;
 	}
 
-	public void mobile(final Context context, final String uid, final String action, final String sip_id, final String token) throws IOException
+	public void mobile(final String uid, final String action, final String sip_id, final String token) throws IOException
 	{
 		synchronized(lock_obj) {
 			HttpsURLConnection con = null;
@@ -520,12 +520,12 @@ public class QThProvisionUtility {
 				instream.close();
 				instream = null;
 
-				setMobileAction(context, action);
+				setMobileAction(action);
 				if (result.startsWith("service=mobile&msg=success")) {
 					Log.d(DEBUGTAG, "=> mobile " + action + " success");
-					setMobileStatus(context, true);
+					setMobileStatus(true);
 				} else {
-					setMobileStatus(context, false);
+					setMobileStatus(false);
 					if (result.startsWith("service=mobile&msg=nosipid")) {
 						Log.e(DEBUGTAG, "=> mobile " + action + " failed, parameter with out sip id.");
 					} else if (result.startsWith("service=mobile&msg=noaction")) {
@@ -553,7 +553,7 @@ public class QThProvisionUtility {
 			}
 		}
     }
-	
+
 	public void doFileUpload(String path, String uid, String type, String session, String server) throws Exception
 	{
 		HttpURLConnection conn = null;
@@ -571,7 +571,7 @@ public class QThProvisionUtility {
 		Log.d(DEBUGTAG,"doFileUpload(), DOING avatar!!");
 		try
 		{
-			//------------------ CLIENT REQUEST 
+			//------------------ CLIENT REQUEST
 			Log.e(DEBUGTAG,"doFileUpload(), Inside second Method");
 			FileInputStream fileInputStream = new FileInputStream(new File(path) );
 			// Open a HTTP connection to the URL
@@ -609,7 +609,7 @@ public class QThProvisionUtility {
                      dos.write(buffer, 0, bufferSize);
                      bytesAvailable = fileInputStream.available();
                      bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);                                                
+                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
             }
 
             // send multipart form data necesssary after file data...
@@ -636,7 +636,7 @@ public class QThProvisionUtility {
 		}
 
 		//------------------ read the SERVER RESPONSE
-		try 
+		try
 		{
 			InputStream instream = conn.getInputStream();
 			String result = convertStreamToString(instream);
@@ -655,15 +655,15 @@ public class QThProvisionUtility {
     			conn.disconnect();
     			conn = null;
     		}
-    	}		
+    	}
 	}
-	
+
 	Bundle cmd_parser(String cmd)
 	{
 		Bundle ret_b = new Bundle();
 		String[] fields_ = cmd.split("!!");
-		
-		
+
+
 		String[] fields = fields_[0].split("&");
 		String[] items;
 		String token = null, content = null;
@@ -683,10 +683,10 @@ public class QThProvisionUtility {
 	    	}
 			ret_b.putString(token, content);
 		}
-		return ret_b;	
+		return ret_b;
 	}
 
-	
+
     private static String convertStreamToString(InputStream is){
 		BufferedReader reader =new BufferedReader(new InputStreamReader(is));
 		StringBuilder sb =new StringBuilder();
@@ -707,17 +707,17 @@ public class QThProvisionUtility {
 				reader.close();
 			}catch (IOException e){
 				Log.e(DEBUGTAG,"convertStreamToString:"+e);
-			}			
+			}
 		}
     	return sb.toString();
     }
-    
+
     private void PhonebookDownload(Bundle result_bundle, String result) throws Exception{
     	String provisionType = result_bundle.getString(TAG_TYPE, "");
     	String provision_url = result_bundle.getString("Pserver") +provisionType+"&service=phonebook&action=download&uid="+result_bundle.getString("uid")+"&session="+result_bundle.getString("session");
-		
+
     	Log.d(DEBUGTAG,"PhonebookDownload(), url:"+provision_url);
-		
+
     	password=result_bundle.getString("key");
     	try{
 			String download_file_path = HttpUtility.httpsdownloadFile(provision_url, PHONEBOOK_FILENAME);
@@ -726,7 +726,7 @@ public class QThProvisionUtility {
 			Jtar jtar = new Jtar();
 		    jtar.untar(aescript_file,Hack.getStoragePath());
 			ArrayList<QTContact2> temp_list = QtalkDB.parseProvisionPhonebook(phonebook_file);
-			QtalkDB qtalkdb = new QtalkDB();
+			QtalkDB qtalkdb = QtalkDB.getInstance(mContext);
 			qtalkdb.importProvisioningPhonebook(temp_list);
 			Cursor cs = qtalkdb.returnAllPBEntry();
 	        cs.close();
@@ -743,7 +743,7 @@ public class QThProvisionUtility {
             return;
 		}
     }
-    
+
     private void ProvisionDownload(Bundle result_bundle, String result) throws Exception{
     	String provisionType = result_bundle.getString(TAG_TYPE, "");
     	String provision_url = result_bundle.getString("Pserver") +provisionType+"&service=provision&action=download&uid="+result_bundle.getString("uid")+"&session="+result_bundle.getString("session");

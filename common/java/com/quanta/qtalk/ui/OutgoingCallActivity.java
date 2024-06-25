@@ -204,8 +204,7 @@ public class OutgoingCallActivity extends AbstractOutgoingCallActivity
                 callerIDContent="Unknown caller";
             }
 
-            QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-            QtalkDB qtalkdb = new QtalkDB();
+            QtalkDB qtalkdb = QtalkDB.getInstance(this);
         	
         	Cursor cs = qtalkdb.returnAllPBEntry();
         	

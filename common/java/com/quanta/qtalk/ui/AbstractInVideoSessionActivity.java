@@ -15,7 +15,6 @@ import android.view.TextureView;
 import android.widget.Toast;
 
 import com.quanta.qtalk.FailedOperateException;
-import com.quanta.qtalk.QtalkApplication;
 import com.quanta.qtalk.QtalkEngine;
 import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.call.ICallListener;
@@ -136,7 +135,6 @@ public abstract class AbstractInVideoSessionActivity extends AbstractBaseCallAct
     {
         super.onCreate(savedInstanceState);
         if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"onCreate");
-        QtalkApplication app = (QtalkApplication) getApplication();
         
       //eason - test getSettings
         QtalkSettings qtalkSetting = null;
@@ -154,7 +152,7 @@ public abstract class AbstractInVideoSessionActivity extends AbstractBaseCallAct
             if(mCallID==null)
             	mCallID = "0";
 
-        	mMediaEngine = app.getMediaEngine(mCallID);
+        	mMediaEngine = getMediaEngine(mCallID);
             mMediaEngine.reset();
 
             //mStartTime = System.currentTimeMillis();
@@ -433,9 +431,8 @@ public abstract class AbstractInVideoSessionActivity extends AbstractBaseCallAct
         super.onDestroy();
         sendHangUpBroadcast();
         if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"==>onDestroy");
-        QtalkApplication app = (QtalkApplication) getApplication();
 
-    	app.destoryMediaEngine(mCallID);
+        destoryMediaEngine(mCallID);
         mMediaEngine.stop(AbstractInVideoSessionActivity.this);
         mMediaEngine = null;
         // Take advantage of that onSessionEnd is triggered slower.

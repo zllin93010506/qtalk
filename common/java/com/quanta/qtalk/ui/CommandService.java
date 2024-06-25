@@ -238,7 +238,7 @@ public class CommandService extends Service {
             Phonebook(msgData);
         }
     };
-
+    QThProvisionUtility qtnMessenger;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -253,6 +253,8 @@ public class CommandService extends Service {
         RU.init(this);
         mContext = this;
 
+        qtnMessenger = new QThProvisionUtility(CommandService.this, mActivateHandler, null);
+        qtnProvisionMessenger = new QThProvisionUtility(CommandService.this, mProvisionHandler, null);
         final Intent myintent = new Intent();
         myintent.setClass(CommandService.this, QTReceiver.class);
         myintent.setClass(CommandService.this, LauncherReceiver.class);
@@ -359,8 +361,8 @@ public class CommandService extends Service {
                 @Override
                 public void run() {
                     try {
-                        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler, null);
-                        qtnMessenger.mobile(CommandService.this, QThProvisionUtility.provision_info.authentication_id,
+
+                        qtnMessenger.mobile(QThProvisionUtility.provision_info.authentication_id,
                                 action, QThProvisionUtility.provision_info.sip_id, QtalkSettings.tts_deviceId);
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
@@ -704,8 +706,6 @@ public class CommandService extends Service {
                                 @Override
                                 public void run() {
                                     try {
-                                        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler,
-                                                null);
                                         Log.d(DEBUGTAG, "ServiceChanged command_wake uid="
                                                 + QThProvisionUtility.provision_info.authentication_id);
                                         qtnMessenger.ServiceChanged(
@@ -753,7 +753,6 @@ public class CommandService extends Service {
                         @Override
                         public void run() {
                             try {
-                                QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler, null);
                                 if (Hack.isPhone() && changedResource.contains("practitioners"))
                                     qtnMessenger.ServiceChanged(QThProvisionUtility.provision_info.authentication_id,
                                             true);
@@ -848,8 +847,7 @@ public class CommandService extends Service {
     // --------------make call
     // function-----------------------------------------------------------
     private void make_uid_call() {
-        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler, null);
-        QtalkDB qtalkdb = new QtalkDB();
+        QtalkDB qtalkdb = QtalkDB.getInstance(this);
 
         Cursor cs = qtalkdb.returnAllPBEntry();
         int size = cs.getCount();
@@ -894,8 +892,7 @@ public class CommandService extends Service {
     // --------------nurse call
     // function----------------------------------------------------------
     private void NurseSeqCall() {
-        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler, null);
-        QtalkDB qtalkdb = new QtalkDB();
+        QtalkDB qtalkdb = QtalkDB.getInstance(this);
 
         Cursor cs = qtalkdb.returnAllPBEntry();
         int size = cs.getCount();
@@ -928,8 +925,7 @@ public class CommandService extends Service {
 
                 // ------------------------------------------------------------------------------
                 // find the number
-                QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler, null);
-                QtalkDB qtalkdb = new QtalkDB();
+                QtalkDB qtalkdb = QtalkDB.getInstance(CommandService.this);
 
                 Cursor cs = qtalkdb.returnAllPBEntry();
                 int size = cs.getCount();
@@ -1204,7 +1200,6 @@ public class CommandService extends Service {
                 + "&session=" + qtalk_settings.session + "&timestamp=" + qtalk_settings.lastPhonebookFileTime;
         if (ProvisionSetupActivity.debugMode)
             Log.d(DEBUGTAG, "phonebook_uri:" + phonebook_uri);
-        qtnProvisionMessenger = new QThProvisionUtility(mProvisionHandler, null);
         try {
             // if( phonebook_uri.startsWith("https"))
             {
@@ -1253,7 +1248,7 @@ public class CommandService extends Service {
             Log.d(DEBUGTAG, "release_test Flag.Activation= " + Flag.Activation.getState() + "line="
                     + Thread.currentThread().getStackTrace()[2].getLineNumber());
             Flag.Activation.setState(true);
-            qtalkdb = new QtalkDB();
+            qtalkdb = QtalkDB.getInstance(CommandService.this);
             ProvisionInfo provision_info = null;
             Cursor cs = qtalkdb.returnAllATEntry();
             cs.moveToFirst();
@@ -1305,9 +1300,6 @@ public class CommandService extends Service {
                 @Override
                 public void run() {
                     try {
-                        qtnProvisionMessenger = new QThProvisionUtility(mProvisionHandler, null);
-                        Time t = new Time();
-                        t.setToNow();
                         provision_uri = qtalk_settings.provisionServer + qtalk_settings.provisionType
                                 + "&service=provision&action=check&uid=" + qtalk_settings.provisionID + "&session="
                                 + qtalk_settings.session + "&timestamp=" + qtalk_settings.lastProvisionFileTime;
@@ -1357,8 +1349,7 @@ public class CommandService extends Service {
                 public void run() {
                     // for test purpose "/pod/dispatch.do"
                     // "/~kakasi/provision/provision.php"
-                    QThProvisionUtility qtnMessenger = new QThProvisionUtility(mActivateHandler, null);
-                    QtalkDB qtalkdb = new QtalkDB();
+                    QtalkDB qtalkdb = QtalkDB.getInstance(CommandService.this);
 
                     ProvisionInfo provision_info = null;
                     Cursor cs = qtalkdb.returnAllATEntry();
@@ -1597,7 +1588,7 @@ public class CommandService extends Service {
             // CommandService.this.stopService(new
             // Intent(CommandService.this,QTService.class));
 
-            QtalkDB qtalkdb = new QtalkDB();
+            QtalkDB qtalkdb = QtalkDB.getInstance(CommandService.this);
             QtalkSettings qtalk_settings = null;
             try {
                 qtalk_settings = getSetting(false);
@@ -1680,9 +1671,6 @@ public class CommandService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                QThProvisionUtility qtnMessenger = new QThProvisionUtility(mLogoutHandler, null);
-                QtalkDB qtalkdb = new QtalkDB();
-
                 if (QThProvisionUtility.provision_info != null) {
                     logout_uri = QThProvisionUtility.provision_info.phonebook_uri + provisionType + "&service=sip&uid="
                             + provisionID + "&action=unregister" + "&sip_id=" + userID;

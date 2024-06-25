@@ -164,8 +164,8 @@ public class ProvisionLoginActivity extends AbstractSetupActivity
                 public void run()
                 {
                 	// for test purpose "/pod/dispatch.do" "/~kakasi/provision/provision.php"
-                	QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-                	QtalkDB qtalkdb = new QtalkDB();
+                	QThProvisionUtility qtnMessenger = new QThProvisionUtility(ProvisionLoginActivity.this, mHandler, null);
+                	QtalkDB qtalkdb = QtalkDB.getInstance(ProvisionLoginActivity.this);
                 	
                 	
                 	Cursor cs = qtalkdb.returnAllATEntry();

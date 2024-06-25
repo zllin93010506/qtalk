@@ -31,10 +31,6 @@
     <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.CALL_AUDIO_INTERCEPTION"/>
 
-    <uses-sdk
-        android:minSdkVersion="26"
-        android:targetSdkVersion="31" />
-
     <application>
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -295,9 +291,6 @@
                 <action android:name="com.quanta.qtalk.APP_START" />
                 <action android:name="android.intent.action.vc.contacts" />
                 <action android:name="android.intent.action.vc.history" />
-                <action android:name="android.intent.action.vc.login"/>    
-                <action android:name="android.intent.action.vc.logout" />  
-                <action android:name="android.intent.action.vc.message" />
                 <action android:name="android.intent.action.vc.login" />
                 <action android:name= "android.intent.action.vc.message" />
                 <action android:name="android.intent.action.vc.get.login.data" />
@@ -309,8 +302,6 @@
                 <action android:name="android.intent.action.vc.tts.list" />
                 <action android:name="android.intent.action.vc.tts" />
                 <action android:name="android.intent.action.vc.tts.cb" />
-                <action android:name="android.intent.action.vc.contacts" />
-                <action android:name="android.intent.action.vc.history" />
                 <action android:name="android.intent.action.vc.logon.state" />
                 <action android:name="android.intent.action.vc.logon.state.cb" />
                 <action android:name="android.intent.action.vc.alarm" />
@@ -357,10 +348,6 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.quanta.qtalk.ui.PermissionRequestActivity"
             android:theme="@style/Theme.NoTitle"

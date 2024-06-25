@@ -54,7 +54,7 @@ public class BusyCallActivity extends AbstractVolumeActivity
 		}
 		String PhoneNumber = null, Role = null, Name = null, Title = null, Role_UI=null; 
 		String callerIDContent = bundle.getString("BusyID");
-        QtalkDB qtalkdb = new QtalkDB();
+        QtalkDB qtalkdb = QtalkDB.getInstance(this);
     	
     	Cursor cs = qtalkdb.returnAllPBEntry();
     	int size = cs.getCount();

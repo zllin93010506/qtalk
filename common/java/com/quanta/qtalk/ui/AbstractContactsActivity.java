@@ -23,7 +23,7 @@ public abstract class AbstractContactsActivity extends AbstractUiListActivity
     	try
         {
             mContactQTList = ContactManager.getQTContacts(this);
-            QtalkDB qtalkdb = new QtalkDB();
+            QtalkDB qtalkdb = QtalkDB.getInstance(this);
             Cursor cs = qtalkdb.returnAllPBEntry();
             cs.moveToFirst();
             for(int cscnt = 0; cscnt < cs.getCount(); cscnt++)

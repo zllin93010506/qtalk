@@ -54,8 +54,9 @@ public class QtalkDB extends SQLiteOpenHelper {
 	public final String TAG_VERSION = "Version";
 	public final String TAG_CONFIRM = "Confirm";
 	public final String TAG_AUTHENTICATION = "Authentication";
-	public QtalkDB() {
-		super(QtalkApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
+
+	public QtalkDB(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
@@ -80,6 +81,12 @@ public class QtalkDB extends SQLiteOpenHelper {
 		db.execSQL(CREATE_PT_TABLE);
 	}
 	
+	private static QtalkDB instance = null;
+	public static QtalkDB getInstance(Context context) {
+		if(instance == null)
+			instance = new QtalkDB(context);
+		return instance;
+	}
 
 
 	@Override
@@ -318,7 +325,7 @@ public class QtalkDB extends SQLiteOpenHelper {
 	public void deactiveation()
 	{
 		Log.d(DEBUGTAG,"deactiveation");
-		
+
 		SQLiteDatabase delete_db = this.getWritableDatabase();
 		
 		delete_db.delete(AUTHENTICATION_TABLE, null, null);

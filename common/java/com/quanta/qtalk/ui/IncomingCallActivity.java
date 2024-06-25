@@ -190,14 +190,12 @@ public class IncomingCallActivity extends AbstractIncomingCallActivity
         Log.d(DEBUGTAG, "IncomingCallActivity.onCreate(), mRemoteID:" + callerIDContent);
 
 
-        QtalkDB qtalkdb = new QtalkDB();
+        QtalkDB qtalkdb = QtalkDB.getInstance(this);
         PtmsData data = null;
         if(Hack.isPhone() || Hack.isStation()) {
             data = PtmsData.findData(callerIDContent);
         }
         if(data==null) {
-            QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-            
             Cursor cs = qtalkdb.returnAllPBEntry();
             int size = cs.getCount();
             if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"size="+size);

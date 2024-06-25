@@ -324,8 +324,8 @@ public class QTService extends Service implements IQtalkEngineListener {
 			Log.d(DEBUGTAG, "PhonebookrunnableThread(), enter");
 
 			int size1=0;
-			QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-			QtalkDB qtalkdb = new QtalkDB();
+			QThProvisionUtility qtnMessenger = new QThProvisionUtility(QTService.this, mHandler, null);
+			QtalkDB qtalkdb = QtalkDB.getInstance(QTService.this);
 			
 			if (session == null || key == null || lastPhonebookFileTime == null) {
 				Cursor cs = qtalkdb.returnAllATEntry();
@@ -916,8 +916,8 @@ public class QTService extends Service implements IQtalkEngineListener {
 		//Log.d(DEBUGTAG, "PhonebookCheck(), start");
 
 		int size1=0;
-		QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-		QtalkDB qtalkdb = new QtalkDB();
+		QThProvisionUtility qtnMessenger = new QThProvisionUtility(this, mHandler, null);
+		QtalkDB qtalkdb = QtalkDB.getInstance(QTService.this);
 		
 		if (session == null || key == null || lastPhonebookFileTime == null) {
 			Cursor cs = qtalkdb.returnAllATEntry();

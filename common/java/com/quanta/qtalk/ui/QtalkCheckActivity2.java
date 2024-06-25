@@ -143,7 +143,7 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
             		QThProvisionUtility.provision_info.lastPhonebookFileTime = msg.getData().getString("timestamp");
             		provision_time = Integer.valueOf(QThProvisionUtility.provision_info.general_period_check_timer)*1000;
             		phonebook_time = Integer.valueOf(QThProvisionUtility.provision_info.short_period_check_timer)*1000;
-					QtalkDB qtalkdb = new QtalkDB();
+					QtalkDB qtalkdb = QtalkDB.getInstance(QtalkCheckActivity2.this);
             		
             		qtalkdb.insertPTEntry(qtalk_settings.lastPhonebookFileTime,qtalk_settings.lastProvisionFileTime);
 					Cursor cs = qtalkdb.returnAllATEntry();
@@ -246,7 +246,7 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
     				
     				FileUtility.delFolder(Hack.getStoragePath());
 					{
-						qtalkdb = new QtalkDB();
+						qtalkdb = QtalkDB.getInstance(QtalkCheckActivity2.this);
 						Log.d(DEBUGTAG, "qtalkdb.deactiveation()");
 						qtalkdb.deactiveation();
 						qtalkdb.close();
@@ -325,7 +325,7 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
             }
         }
     };
-    QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
+    QThProvisionUtility qtnMessenger = new QThProvisionUtility(this, mHandler, null);
 
     
 	 Runnable provision_update_sccess = new Runnable(){  
@@ -350,7 +350,7 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
 					QThProvisionUtility.provision_info.lastProvisionFileTime = msgData.getString("timestamp");
 					QThProvisionUtility.provision_info.session = msgData.getString("session");
 					qtalk_settings.provisionServer = QThProvisionUtility.provision_info.provision_uri;
-					QtalkDB qtalkdb = new QtalkDB();
+					QtalkDB qtalkdb = QtalkDB.getInstance(QtalkCheckActivity2.this);
 				//	qtalkdb.DeleteATEntry("QTALKDB_AUTHENTICATION", "session");
 			//		
 					if (qtalk_settings.lastPhonebookFileTime != null && qtalk_settings.lastProvisionFileTime != null)
@@ -426,7 +426,7 @@ public class QtalkCheckActivity2 extends AbstractSetupActivity{
 				"line="+Thread.currentThread().getStackTrace()[2].getLineNumber());
     	Flag.Activation.setState(true);
     	historydatabase = new HistoryDataBaseUtility(getApplicationContext());
-    	QtalkDB qtalkdb = new QtalkDB();
+    	QtalkDB qtalkdb = QtalkDB.getInstance(QtalkCheckActivity2.this);
     	Cursor cs = qtalkdb.returnAllATEntry();
     	cs.moveToFirst();
         int cscnt = 0;

@@ -1360,8 +1360,7 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 			if(null == mRemoteID){
 				callerIDContent = "LocalLoopBack";
 			}
-			QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-			QtalkDB qtalkdb = new QtalkDB();
+			QtalkDB qtalkdb = QtalkDB.getInstance(this);
 			
 			Cursor cs = qtalkdb.returnAllPBEntry();
 			int size = cs.getCount();

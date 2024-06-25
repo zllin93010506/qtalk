@@ -149,9 +149,8 @@ public class InPttSessionActivity extends AbstractInAudioSessionActivity {
             callerIDContent="Unknown caller";
                     //TODO
         }        
-        
-        QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler, null);
-        QtalkDB qtalkdb = new QtalkDB();
+
+        QtalkDB qtalkdb = QtalkDB.getInstance(this);
     	
     	Cursor cs = qtalkdb.returnAllPBEntry();
     	int size = cs.getCount();

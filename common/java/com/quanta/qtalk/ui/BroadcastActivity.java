@@ -299,10 +299,6 @@ public class BroadcastActivity extends Activity {
 	};
 	private void sendMCURequest() {
 		Log.d(DEBUGTAG,"sendMCURequest");
-		QThProvisionUtility qtnMessenger = new QThProvisionUtility(mHandler,
-				null);
-		QtalkDB qtalkdb = new QtalkDB();
-		
 		try {
 			final QtalkSettings qtalk_settings = QTReceiver.engine(this, false)
 					.getSettings(this);
@@ -324,6 +320,8 @@ public class BroadcastActivity extends Activity {
 					+ provisionType + "&service=broadcastmcu&uid="
 					+ provisionID + "&action=get_room_number&dep_id="+dep;
 			try {
+				QThProvisionUtility qtnMessenger = new QThProvisionUtility(this, mHandler,
+						null);
 				qtnMessenger.httpsConnect(broadcast_uri, room_number);
 			} catch (Exception e) {
 				Log.e(DEBUGTAG, "BroadcastMCU", e);
@@ -566,6 +564,7 @@ public class BroadcastActivity extends Activity {
 
 		ptt_btn = (Button) win.findViewById(R.id.ptt_btn);
 		tts_scl = (ScrollView) win.findViewById(R.id.tts_ll);
+		ptt_btn.setPadding(screenwidth/38, 0, 0, 0);
 		final RadioGroup ttsRadioGroup = (RadioGroup)win.findViewById(R.id.ttsRadioGroup);
 		TextView empty_message = (TextView)win.findViewById(R.id.empty_message);
 		Button btn_close = (Button)win.findViewById(R.id.btn_close);

@@ -1,7 +1,6 @@
 package com.quanta.qtalk.ui;
 
 import com.quanta.qtalk.FailedOperateException;
-import com.quanta.qtalk.QtalkApplication;
 import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.call.ICallListener;
 import com.quanta.qtalk.media.MediaEngine;
@@ -47,29 +46,8 @@ public abstract class AbstractInAudioSessionActivity extends AbstractBaseCallAct
     protected String   	mAudioSRTPReceiveKey = null;
     
     protected int         mProductType = 0;
-    /*
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent msg) 
-    {   
-        try
-        {
-            if (mMediaEngine!=null)
-            {
-                if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) 
-                {
-                    mMediaEngine.adjuestVolume(AudioManager.ADJUST_LOWER);
-                }
-                else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) 
-                {
-                    mMediaEngine.adjuestVolume(AudioManager.ADJUST_RAISE);
-                }
-            }
-        }catch(Exception ignore)
-        {}
-        boolean result = super.onKeyDown(keyCode, msg);
-        return result;
-    }
-    */
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent msg) 
     {   
@@ -92,7 +70,6 @@ public abstract class AbstractInAudioSessionActivity extends AbstractBaseCallAct
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        QtalkApplication app = (QtalkApplication) getApplication();
         
         //eason - test getSettings
         QtalkSettings qtalkSetting = null;
@@ -107,7 +84,7 @@ public abstract class AbstractInAudioSessionActivity extends AbstractBaseCallAct
         if (mMediaEngine==null)
         {
         	if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG, "onCreate:");
-            mMediaEngine = app.getMediaEngine(mCallID);
+            mMediaEngine = getMediaEngine(mCallID);
 //            mStartTime = System.currentTimeMillis();
             mMediaEngine.reset();
             // Set keep screen on
@@ -276,8 +253,7 @@ public abstract class AbstractInAudioSessionActivity extends AbstractBaseCallAct
         }else 
             Log.e(DEBUGTAG, "onPause: error mMediaEngine is null");
         */
-        QtalkApplication app = (QtalkApplication) getApplication();
-        app.destoryMediaEngine(mCallID);
+        destoryMediaEngine(mCallID);
         mMediaEngine = null;
         // Take advantage of that onSessionEnd is triggered slower.
         // if onDestory is running but current Activity is not myself >> skim setting Activity, new Activity has been set already.

@@ -77,7 +77,7 @@ android {
             signingConfig	signingConfigs.release
         }
     }
-    useLibrary 'org.apache.http.legacy'
+    //useLibrary 'org.apache.http.legacy'
     namespace 'com.quanta.qtalk'
     lint {
         abortOnError false
