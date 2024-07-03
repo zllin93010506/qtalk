@@ -106,4 +106,8 @@ public class QtalkSettings
 	public static String  type = "";
 
 	public static int nurse_station_tap_selected = 0;
+
+	public static int dpi = 0;
+	public static int screenwidth = 1600;
+	public static int screenheight = 900;
 }

@@ -136,7 +136,7 @@ public class BroadcastActivity extends Activity {
 
 		@Override
 		public void onCheckedChanged(RadioGroup group, int checkedId) {
-			if(QtalkSettings.ScreenSize<4){
+			if(!Hack.isStation()){
 				openTTScheckDialog(checkedId);
 				list_popout.dismiss();
 			}else{
@@ -153,7 +153,7 @@ public class BroadcastActivity extends Activity {
 
 		@Override
 		public void onCheckedChanged(RadioGroup group, int checkedId) {
-			if(QtalkSettings.ScreenSize<4){
+			if(!Hack.isStation()){
 				depID.clear();
 				depID.add(deplist.get(checkedId).getDepID());
 				openBroadcastListDialog();
@@ -166,13 +166,15 @@ public class BroadcastActivity extends Activity {
 		}
 		
 	};
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d(DEBUGTAG,"OnCreate");
 		mContext = this;
+		if(QtalkSettings.ScreenSize<0){
+			Hack.getScreenSize(this);
+		}
 		ttslist = new ArrayList<String>();
 		setContentView(R.layout.layout_broadcast);
 		Intent intent = new Intent();
@@ -203,20 +205,15 @@ public class BroadcastActivity extends Activity {
 			// TODO Auto-generated catch block
 			Log.e(DEBUGTAG,"",e);
 		}
-		
-		Configuration config = getResources().getConfiguration();
-		ScreenSize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
-		DisplayMetrics dm = new DisplayMetrics(); 
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-        screenwidth = (int) dm.widthPixels;
-        screenheight = (int) dm.heightPixels;
 
-		
+		ScreenSize = QtalkSettings.ScreenSize;
+        screenwidth = QtalkSettings.screenwidth;
+        screenheight = QtalkSettings.screenheight;
 	}
 	private void sendttsmessage() {
 		if(ttsmessage!=null){
 			if(ProvisionSetupActivity.debugMode)Log.d(DEBUGTAG,"ttsmessage="+ttsmessage);
-			if(QtalkSettings.ScreenSize==4){
+			if(Hack.isStation()){
 				tts_check_xlarge.setVisibility(View.INVISIBLE);
 			}
 			IntentFilter intentfilter = new IntentFilter();
@@ -636,7 +633,7 @@ public class BroadcastActivity extends Activity {
 			}
 		});
 		
-		if(QtalkSettings.ScreenSize<4){
+		if(!Hack.isStation()){
 			
 		}else{
 			tts_check_xlarge = (RelativeLayout)win.findViewById(R.id.rl_tts_xlarge_check);

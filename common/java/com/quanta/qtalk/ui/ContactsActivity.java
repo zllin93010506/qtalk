@@ -997,19 +997,15 @@ public class ContactsActivity extends AbstractContactsActivity{
             //---------------------------------------------------------------------[PT]
     		
     		/*******************************Get dpi*********************************/
-    		DisplayMetrics dm = new DisplayMetrics(); 
-    		getWindowManager().getDefaultDisplay().getMetrics(dm);
-    		dpi = dm.densityDpi;
-            screenwidth = (int) dm.widthPixels;
-            screenheight = (int) dm.heightPixels;
+    		Hack.getScreenSize(this);
+			dpi=QtalkSettings.dpi;
+            screenwidth = QtalkSettings.screenwidth;
+            screenheight = QtalkSettings.screenheight;
             
             xlarge_contacts_gap = screenwidth/13;
             
-    		if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"DisplayMetrics = "+ dm.densityDpi+" screenW = "+screenwidth+" screenH = "+screenheight);
     		/*******************************Get Screen Size*********************************/
-    		Configuration config = getResources().getConfiguration();
-    		if(ProvisionSetupActivity.debugMode) Log.d(DEBUGTAG,"screenLayout = "+ (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK));
-    		ScreenSize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
+    		ScreenSize = QtalkSettings.ScreenSize;
     		Log.d(DEBUGTAG,"screensize = "+ScreenSize+" screenwidth = "+screenwidth+" screenheight = "+screenheight+" dpi = "+dpi);
     		if(ScreenSize<4){
     			photoSize = screenwidth/6;

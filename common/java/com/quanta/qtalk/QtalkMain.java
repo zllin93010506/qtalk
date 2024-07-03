@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -49,7 +50,6 @@ public class QtalkMain extends AbstractSetupActivity
     public static boolean isDeactivate = false;  //解決換床位  停止phonebook check
     AlertDialog mAlertDialog = null;
     HistoryDataBaseUtility historydatabase = null;
-    public static int dpi = 0;
   
     public static final String KEY_REMOTE_ID            = "REMOTE_ID";
     public static final String KEY_CALL_ID              = "CALL_ID";
@@ -109,7 +109,7 @@ public class QtalkMain extends AbstractSetupActivity
 		
 		mcontext = this;
 		if(QtalkSettings.ScreenSize<0) {
-			getScreenSize(this);
+			Hack.getScreenSize(this);
 		}
 		setContentView(R.layout.main);
 		  
@@ -201,7 +201,7 @@ public class QtalkMain extends AbstractSetupActivity
 	        	open_history = bundle.getString("KEY_OPEN_HISTORY");
 	        }
 	        if(QtalkSettings.ScreenSize<0){
-	        	getScreenSize(this);
+	        	Hack.getScreenSize(this);
 	        }
 	        setContentView(R.layout.main);
 	
@@ -226,7 +226,9 @@ public class QtalkMain extends AbstractSetupActivity
                 startQTService = (dirFile.exists() || startQTService);
 
             	if(startQTService)
-                startForegroundService(new Intent(this,QTService.class));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        startForegroundService(new Intent(this,QTService.class));
+                    }
 
                 Intent intent = new Intent();
                 if(open_history == null) {
@@ -254,14 +256,7 @@ public class QtalkMain extends AbstractSetupActivity
         }
         
     } //End of public void onCreate
-    
-    private void getScreenSize(Context context) {
-    	DisplayMetrics dm = new DisplayMetrics(); 
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		dpi = dm.densityDpi;
-		Configuration config = getResources().getConfiguration();
-		QtalkSettings.ScreenSize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
-	}
+
 
 	@Override
     public void onDestroy()

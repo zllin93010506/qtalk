@@ -1,6 +1,7 @@
 package com.quanta.qtalk.util;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,6 +17,7 @@ import android.os.Debug;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import com.quanta.qtalk.QtalkApplication;
@@ -615,5 +617,16 @@ public final class Hack
 	}
 	public static String getTTSFile() {
 		return ttsInfo;
+	}
+
+	public static void getScreenSize(Activity activity) {
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		QtalkSettings.dpi = dm.densityDpi;
+		QtalkSettings.screenwidth = (int) dm.widthPixels;
+		QtalkSettings.screenheight = (int) dm.heightPixels;
+		Configuration config = activity.getResources().getConfiguration();
+		QtalkSettings.ScreenSize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
+		Log.d(DEBUGTAG,"ScreenSize="+QtalkSettings.ScreenSize);
 	}
 }

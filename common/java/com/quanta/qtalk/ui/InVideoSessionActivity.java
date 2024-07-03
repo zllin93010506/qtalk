@@ -151,7 +151,6 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 
 	private int LocalViewStartX = 0,LocalViewStartY =0;
 
-	public static int dpi = 0;
 	public static float scale = 0;
 	public static final int LOWBANDWIDTH_OFF = 0;
 	public static final int LOWBANDWIDTH_ON = 1;
@@ -680,9 +679,9 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 		final DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getRealMetrics(dm);
 		scale = this.getResources().getDisplayMetrics().density;
-		dpi = dm.densityDpi;
-		screenW = dm.widthPixels;
-		screenH =dm.heightPixels;
+		Hack.getScreenSize(this);
+		screenW = QtalkSettings.screenwidth;
+		screenH =QtalkSettings.screenheight;
 
 		if(screenH > screenW) isScreenPortrait = true;
 		else isScreenPortrait = false;
