@@ -618,15 +618,4 @@ public final class Hack
 	public static String getTTSFile() {
 		return ttsInfo;
 	}
-
-	public static void getScreenSize(Activity activity) {
-		DisplayMetrics dm = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-		QtalkSettings.dpi = dm.densityDpi;
-		QtalkSettings.screenwidth = (int) dm.widthPixels;
-		QtalkSettings.screenheight = (int) dm.heightPixels;
-		Configuration config = activity.getResources().getConfiguration();
-		QtalkSettings.ScreenSize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
-		Log.d(DEBUGTAG,"ScreenSize="+QtalkSettings.ScreenSize);
-	}
 }

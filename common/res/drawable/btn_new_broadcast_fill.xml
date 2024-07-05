@@ -1,0 +1,18 @@
+<!-- res/drawable/btn_new_broadcast_fill.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 底層是背景圖片 -->
+    <item android:top="0dp" android:bottom="0dp" android:left="0dp" android:right="0dp">
+        <bitmap
+            android:src="@drawable/btn_new_broadcast"
+            android:gravity="fill" />
+    </item>
+    <!-- 上層是邊框 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="0dp"
+                android:color="#FF0000" /> <!-- 邊框的顏色和寬度 -->
+        </shape>
+    </item>
+</layer-list>

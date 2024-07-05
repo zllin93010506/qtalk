@@ -22,6 +22,7 @@ import android.view.SurfaceView;
 
 import com.quanta.qtalk.FailedOperateException;
 import com.quanta.qtalk.QtalkMain;
+import com.quanta.qtalk.QtalkSettings;
 import com.quanta.qtalk.R;
 import com.quanta.qtalk.UnSupportException;
 import com.quanta.qtalk.ui.ContactsActivity;
@@ -228,9 +229,9 @@ public class VideoRenderSurfacePlus extends VideoPreview
     private void initial(Context context)
     {
         mcontext = context;
-        Configuration config = getResources().getConfiguration();
-		screensize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
-		
+        //Configuration config = getResources().getConfiguration();
+		//screensize = (config.screenLayout&Configuration.SCREENLAYOUT_SIZE_MASK);
+		screensize = QtalkSettings.ScreenSize;
         getHolder().addCallback(new Callback()
         {
             public void surfaceChanged(SurfaceHolder holder, int format,

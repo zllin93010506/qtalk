@@ -3,11 +3,9 @@ package com.quanta.qtalk;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.widget.ListView;
 
 import com.quanta.qtalk.provision.PackageVersionUtility;
@@ -20,13 +18,12 @@ import com.quanta.qtalk.ui.ProvisionSetupActivity;
 import com.quanta.qtalk.ui.QTReceiver;
 import com.quanta.qtalk.ui.QTService;
 import com.quanta.qtalk.ui.QThProvisionUtility;
-import com.quanta.qtalk.ui.QtalkCheckActivity2;
 import com.quanta.qtalk.ui.RingingUtil;
 import com.quanta.qtalk.ui.ViroActivityManager;
 import com.quanta.qtalk.ui.history.HistoryDataBaseUtility;
 import com.quanta.qtalk.util.Hack;
 import com.quanta.qtalk.util.Log;
-import com.quanta.qtalk.R;
+import com.quanta.qtalk.util.QtalkUtility;
 
 import java.io.File;
 
@@ -109,7 +106,7 @@ public class QtalkMain extends AbstractSetupActivity
 		
 		mcontext = this;
 		if(QtalkSettings.ScreenSize<0) {
-			Hack.getScreenSize(this);
+			QtalkUtility.initRatios(this);
 		}
 		setContentView(R.layout.main);
 		  
@@ -201,7 +198,7 @@ public class QtalkMain extends AbstractSetupActivity
 	        	open_history = bundle.getString("KEY_OPEN_HISTORY");
 	        }
 	        if(QtalkSettings.ScreenSize<0){
-	        	Hack.getScreenSize(this);
+	        	QtalkUtility.initRatios(this);
 	        }
 	        setContentView(R.layout.main);
 	

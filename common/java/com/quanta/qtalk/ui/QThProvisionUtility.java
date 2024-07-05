@@ -31,6 +31,8 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,9 +40,14 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -202,6 +209,7 @@ public class QThProvisionUtility {
 				provision_response_msg.setData(result_bundle);
 	            mUI_Handler.sendMessage(provision_response_msg);
 			}
+			updateTTS();
 		}
 		/***************************************activate check******************************************/
 		else if(result_bundle.getString(TAG_SERVICE).contentEquals(TAG_SERVICE_ACTIVATE) && result_bundle.getString(TAG_MSG).equals(TAG_SUCCESS))
@@ -1098,6 +1106,225 @@ public class QThProvisionUtility {
 
 	public void setURL(String uRL) {
 		URL = uRL;
+	}
+
+
+
+	synchronized public static void getTTS(String ptmsIp, String deviceId) throws IOException {
+		try {
+			Log.d(DEBUGTAG, "httpsConnect(ptms tts), ptmsIp:" + ptmsIp + "deviceId" + deviceId);
+			String url = "https://" + ptmsIp + "/api/v2/texttemplates?config__device=" + deviceId + "&category=TEXTTEMPLATE_NOTIFICATION&page_size=100";
+			JSONArray articles = null;
+			ArrayList<String> ttlStrings = new ArrayList<String>();
+			while (url != null) {
+				Log.d(DEBUGTAG, "httpsConnect(ptms tts), url:" + url);
+				String result = Hack.httpsConnect(url);
+				Log.d(DEBUGTAG, "httpsConnect(ptms tts), result:" + result);
+				JSONObject json = new JSONObject(result);
+				if (json.isNull("results")) {
+					Log.e(DEBUGTAG, "httpsConnect(ptms tts), no results in json");
+				} else {
+					/*
+					 * Iterator<String> keys = json.keys(); for
+					 * (Iterator<String> i = keys; i.hasNext();) { String key =
+					 * i.next(); Log.d(DEBUGTAG, "httpsConnect(ptms tts), key:"
+					 * + key + " value:" + json.getString(key)); }
+					 */
+					articles = json.getJSONArray("results");
+
+					ttlStrings.addAll(configProcessPhoneNotification(articles));
+				}
+				if (json.isNull("next")) {
+					url = null;
+				} else {
+					url = json.getString("next");
+				}
+			}
+			Log.d(DEBUGTAG, "getTTS(ptms tts), ttlStrings.size:" + ttlStrings.size());
+			writeToLocalList(ttlStrings);
+			Log.d(DEBUGTAG, "getTTS(ptms tts) exit loop");
+		} catch (Exception ex) {
+			Log.e(DEBUGTAG, "", ex);
+		}
+	}
+	private static void writeToLocalList(ArrayList<String> ttsList) {
+		String path = Hack.getStoragePath() + "ttsList";
+		File dirFile = new File(Hack.getStoragePath());
+		Log.d(DEBUGTAG, "ttsList exists: " + dirFile.exists());
+		if (!dirFile.exists()) {
+			dirFile.mkdir();
+		}
+		File listFile = new File(path);
+		FileWriter FW = null;
+		try {
+			FW = new FileWriter(listFile);
+			for (int i = 0; i < ttsList.size(); i++) {
+				//Log.d(DEBUGTAG,"ttsList: "+i+" "+ttsList.get(i).toString());
+				FW.write(ttsList.get(i).toString());
+				FW.write('\n');
+
+			}
+			FW.close();
+		} catch (IOException e) {
+			Log.e(DEBUGTAG, "Writing ttslist error!!", e);
+		}
+	}
+	private static String ptmsIp = null;
+	private static String deviceId = null;
+	private static Runnable getTTSThread = new Runnable() {
+		public void run() {
+			try {
+				getTTS(ptmsIp, deviceId);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e(DEBUGTAG, "", e);
+			}
+		}
+	};
+
+	public static void updateTTS() {
+		String path = Hack.getTTSFile();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			ptmsIp = br.readLine();
+			deviceId = br.readLine();
+			Hack.setPTMSInfo(ptmsIp, deviceId);
+			br.close();
+			Thread thread = new Thread(getTTSThread);
+			thread.start();
+		} catch (Exception e) {
+			Log.e(DEBUGTAG, "", e);
+		}
+	}
+
+	public static ArrayList<String> configProcessPhoneNotification(JSONArray notification) {
+		HashMap<String, ArrayList<HashMap<String, String>>> notifyAll = new HashMap<String, ArrayList<HashMap<String, String>>>();
+
+		try {
+			for (int i = 0; !notification.isNull(i); i++) {
+				JSONObject obj;
+				String category;
+
+				obj = notification.getJSONObject(i);
+				category = obj.getString("category");
+
+				HashMap<String, String> item = new HashMap<String, String>();
+
+				if (notifyAll.containsKey(category) == false) {
+					notifyAll.put(category, new ArrayList<HashMap<String, String>>());
+				}
+
+				item.put("id", obj.getString("id"));
+				item.put("title", obj.getString("title"));
+				item.put("priority", obj.getString("priority"));
+				Log.d(DEBUGTAG, "id:" + obj.getString("id"));
+				Log.d(DEBUGTAG, "title:" + obj.getString("title"));
+				Log.d(DEBUGTAG, "priority:" + obj.getString("priority"));
+				notifyAll.get(category).add(item);
+			}
+		} catch (JSONException e) {
+			Log.d(DEBUGTAG, "JSONException : " + e.toString());
+		}
+
+		TreeMap<String, ArrayList<HashMap<String, String>>> sorted = new TreeMap<String, ArrayList<HashMap<String, String>>>(
+				notifyAll);
+		Log.d(DEBUGTAG, "Wifi phone tts notification: " + notification.length());
+
+		ArrayList<String> tCategoryPriority = new ArrayList<String>(sorted.keySet());
+		Collections.sort(tCategoryPriority);
+		ArrayList<String> ttsContent = new ArrayList<String>();
+
+		if (sorted != null) {
+			for (String category : tCategoryPriority) {
+				// Log.d(TAG,"[MSG] TTS category: "+category);
+				// Log.d(TAG,"[MSG] TTS content list:
+				// "+sorted.get(category).toString());
+				if (sorted.get(category) != null && sorted.get(category).size() > 0) {
+					for (int i = 0; i < SortByPriority(sorted.get(category), false).size(); i++) {
+						ttsContent.add(sorted.get(category).get(i).get("title").trim());
+						// Log.d(TAG,"[MSG] TTS content:
+						// "+sorted.get(category).get(i).get("title").trim());
+					}
+				}
+			}
+		}
+
+
+		return ttsContent;
+	}
+	private static ArrayList<HashMap<String, String>> SortByPriority(ArrayList<HashMap<String, String>> items,
+															  boolean timeSort) {
+		int i, j;
+		HashMap<String, String> temp;
+		for (i = 0; i < items.size() - 1; i++) {
+			for (j = i + 1; j < items.size(); j++) {
+				if (Integer.valueOf(items.get(i).get("priority")) > Integer.valueOf(items.get(j).get("priority"))) {
+					temp = items.get(i);
+					items.set(i, items.get(j));
+					items.set(j, temp);
+				}
+			}
+		}
+
+		if (items.size() == 1)
+			return items;
+
+		if (timeSort) {
+			String p = "";
+			ArrayList<HashMap<String, String>> byPriority = new ArrayList<HashMap<String, String>>();
+			ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+			for (int m = 0; m < items.size(); m++) {
+				if (!p.equals(items.get(m).get("priority"))) {
+					p = items.get(m).get("priority");
+					if (byPriority.size() > 0) {
+						for (HashMap<String, String> byPrioityItem : SortByTimestamp(byPriority)) {
+							result.add(byPrioityItem);
+						}
+					}
+					byPriority = null;
+					byPriority = new ArrayList<HashMap<String, String>>();
+					byPriority.add(items.get(m));
+				} else if (p.equals(items.get(m).get("priority"))) {
+					byPriority.add(items.get(m));
+				}
+
+				if (m == items.size() - 1) {
+					for (HashMap<String, String> byPrioityItem : SortByTimestamp(byPriority)) {
+						result.add(byPrioityItem);
+					}
+				}
+
+			}
+			// Log.d(TAG, "[final result by time]: "+result.toString());
+			return result;
+		} else {
+			return items;
+		}
+
+	}
+
+	private static ArrayList<HashMap<String, String>> SortByTimestamp(ArrayList<HashMap<String, String>> items) {
+		int i, j;
+		HashMap<String, String> temp;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+		for (i = 0; i < items.size() - 1; i++) {
+			for (j = i + 1; j < items.size(); j++) {
+
+				try {
+					Date d1 = df.parse(items.get(i).get("created"));
+					Date d2 = df.parse(items.get(j).get("created"));
+					if (d1.compareTo(d2) <= 0) {
+						temp = items.get(i);
+						items.set(i, items.get(j));
+						items.set(j, temp);
+					}
+				} catch (ParseException e) {
+					Log.e(DEBUGTAG, "", e);
+				}
+
+			}
+		}
+		return items;
 	}
 
 }

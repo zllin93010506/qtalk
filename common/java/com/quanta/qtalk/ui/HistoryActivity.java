@@ -320,8 +320,9 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
             LinearLayout.LayoutParams calltypelayout;
             //LinearLayout buttom = new LinearLayout(context);
             if (QtalkSettings.ScreenSize == -1) {
-                Configuration config = getResources().getConfiguration();
-                QtalkSettings.ScreenSize = (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+                //Configuration config = getResources().getConfiguration();
+                //QtalkSettings.ScreenSize = (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+                QtalkUtility.initRatios(HistoryActivity.this);
             }
             if (QtalkSettings.ScreenSize >= 4) {
                 this.setPadding(screenwidth / 7, 0, screenwidth / 7, 0);
@@ -465,8 +466,11 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
             DisplayMetrics dm = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(dm);
             dpi = dm.densityDpi;
-            Configuration config = getResources().getConfiguration();
-            QtalkSettings.ScreenSize = (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+            if(QtalkSettings.ScreenSize == -1) {
+                QtalkUtility.initRatios(HistoryActivity.this);
+            }
+            //Configuration config = getResources().getConfiguration();
+            //QtalkSettings.ScreenSize = (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
 
             if (QtalkSettings.ScreenSize == 4) {
                 timeCell.setOrientation(HORIZONTAL);
@@ -817,6 +821,14 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
                 Log.e(DEBUGTAG, "data base not available", err);
             }
         }
+        if(QtalkSettings.ScreenSize == -1) {
+            QtalkUtility.initRatios(HistoryActivity.this);
+        }
+        screenwidth = QtalkUtility.screenWidth;
+        screenheight = QtalkUtility.screenHeight;
+        screenSize = QtalkSettings.ScreenSize;
+
+        /*
         final DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         Configuration config = getResources().getConfiguration();
@@ -824,6 +836,7 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
         screenheight = (int) dm.heightPixels;
         screenSize = (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
         picSize = screenwidth / 10;
+*/
         if (screenSize >= 4) {
             photoSize = screenwidth / 15;
             picSize = screenwidth / 25;
@@ -831,7 +844,6 @@ public class HistoryActivity extends AbstractContactsActivity implements ICallHi
             photoSize = screenwidth / 6;
             picSize = screenwidth / 10;
         }
-
         mCallLogList = mDataBaseAdapter.getAllData();
         CallSize = HistoryDataBaseUtility.size;
 //        if (CallSize > 1)

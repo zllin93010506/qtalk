@@ -679,9 +679,9 @@ public class InVideoSessionActivity extends AbstractInVideoSessionActivity imple
 		final DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getRealMetrics(dm);
 		scale = this.getResources().getDisplayMetrics().density;
-		Hack.getScreenSize(this);
-		screenW = QtalkSettings.screenwidth;
-		screenH =QtalkSettings.screenheight;
+		QtalkUtility.initRatios(this);
+		screenW = QtalkUtility.screenWidth;
+		screenH =QtalkUtility.screenHeight;
 
 		if(screenH > screenW) isScreenPortrait = true;
 		else isScreenPortrait = false;
